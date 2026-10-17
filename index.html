@@ -3,30 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+/* =====================================================
+   ✏️ هنا كل الكلام اللي في الموقع، عدّل براحتك
+   غيّر الكلام اللي جوه علامات التنصيص "..." بس
+   ومتمسحش العلامات نفسها ولا الفواصل ,
+   تقدر تكتب عربي أو إنجليزي عادي
+   ===================================================== */
+
+const NAME = "Jana";   // اسمها
+const ME   = "Me";     // اسمك
+
+const CONFIG = {
+  tabTitle: "Happy Birthday " + NAME,
+  navLabels: ["Page 1", "Page 2", "Page 3", "Page 4", "Page 5", "Page 6"],
+
+  // كلام الزراير
+  texts: {
+    open: "open me",
+    next: "next",
+    back: "back",
+    nowPlaying: "now playing",
+    tapToOpen: "tap to open"
+  },
+
+  /* ================= الصفحة ١ : الافتتاحية ================= */
+  heroLines: ["HAPPY", "BIRTHDAY", "JANA"],
+  babyPhoto: "baby.png",
+  showHat: true,
+
+  // موسيقى الخلفية
+  bgMusic: "background.mp3",
+  bgVolume: 0.35,
+
+  /* ================= الصفحة ٢ ================= */
+
+  // ١- الكلمات اللي حوالين صورتها (5 شمال و5 يمين)
+  mainPhoto: "main.jpg",
+  traitsLeft:  ["Thoughtful", "Warmhearted", "Funny", "Supportive", "Charming"],
+  traitsRight: ["Loyal", "Calm", "Caring", "Genuine", "Unforgettable"],
+
+  // ٢- الكلام اللي جنب صور البولارويد ... اللي بين *نجمتين* بيتلوّن
+  memoriesText: "Every photo here holds a *little universe* of us. The *laughter*, the long talks, the *quiet moments*, and the silly things nobody else would understand. I'd keep every single one, and I'd live them *all over again*.",
+  polaroids: ["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg"],
+
+  // ٣- الجواب اللي في آخر الصفحة (مكتوب بين علامتين ` ` مش " ")
+  letterTitle: `Happy Birthday, ${NAME}.`,
+  letter: `
+Write your letter here.
+
+Leave an empty line between paragraphs.
+`,
+  letterSign: `Love, ${ME}.`,
+  letterPhotos: ["s1.jpg", "s2.jpg", "s3.jpg", "s4.jpg", "s5.jpg"],
+
+  /* ================= الصفحة ٣ : صورها ================= */
+  galleryTitle: "a few of my favorite pictures of you",
+  gallerySubtitle: "tap any photo",
+  // كل سطر = صورة + الكلام اللي تحتها. عايز تزود صورة؟ انسخ سطر والصقه تحته
+  gallery: [
+    { photo: "g1.jpg", caption: "this smile" },
+    { photo: "g2.jpg", caption: "my favorite day" },
+    { photo: "g3.jpg", caption: "look at you" },
+    { photo: "g4.jpg", caption: "always this pretty" },
+    { photo: "g5.jpg", caption: "us" },
+    { photo: "g6.jpg", caption: "forever my person" }
+  ],
+
+  /* ================= الصفحة ٤ : الرسالة ================= */
+  messageTo: `To ${NAME},`,
+  // سيب سطر فاضي بين كل فقرة والتانية
+  message: `
+Write your message here.
+
+Every paragraph will appear on its own, one after the other, like someone is writing it.
+
+Take your time, this page is only for her.
+`,
+  messageFrom: `Yours, ${ME}`,
+
+  /* ================= الصفحة ٥ : الفويس ================= */
+  voiceTitle: "a little voice note for you",
+  voiceSubtitle: "press play and listen till the end",
+  voicePhoto: "voice-photo.jpg",
+  voiceNote: "voice.m4a",
+
+  /* ================= الصفحة ٦ : الأغاني ================= */
+  songsTitle: "Songs",
+  songsSubtitle: "that remind me<br>of you",
+  songsPhoto: "songs.jpg",
+  showSongTitles: true,
+  // start و end بالثواني = الجزء اللي هيشتغل (مثلاً 1:05 تبقى 65)
+  songs: [
+    { title: "Song 1",  artist: "Artist", cover: "cover1.jpg",  file: "song1.mp3",  start: 45, end: 75 },
+    { title: "Song 2",  artist: "Artist", cover: "cover2.jpg",  file: "song2.mp3",  start: 30, end: 60 },
+    { title: "Song 3",  artist: "Artist", cover: "cover3.jpg",  file: "song3.mp3",  start: 60, end: 90 },
+    { title: "Song 4",  artist: "Artist", cover: "cover4.jpg",  file: "song4.mp3",  start: 20, end: 50 },
+    { title: "Song 5",  artist: "Artist", cover: "cover5.jpg",  file: "song5.mp3",  start: 50, end: 80 },
+    { title: "Song 6",  artist: "Artist", cover: "cover6.jpg",  file: "song6.mp3",  start: 40, end: 70 },
+    { title: "Song 7",  artist: "Artist", cover: "cover7.jpg",  file: "song7.mp3",  start: 35, end: 65 },
+    { title: "Song 8",  artist: "Artist", cover: "cover8.jpg",  file: "song8.mp3",  start: 55, end: 85 },
+    { title: "Song 9",  artist: "Artist", cover: "cover9.jpg",  file: "song9.mp3",  start: 25, end: 55 },
+    { title: "Song 10", artist: "Artist", cover: "cover10.jpg", file: "song10.mp3", start: 60, end: 90 }
+  ]
+};
+/* ============ خلص الكلام، اللي تحت ده كود الموقع ============ */
+</script>
+
 <title>Happy Birthday</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Amiri:ital@0;1&family=Cairo:wght@400;600&family=Libre+Baskerville:ital@0;1&family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Amiri:ital@0;1&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600&family=Caveat:wght@500;600&family=Libre+Baskerville:ital@0;1&family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{--cream:#f2ece9;--maroon:#86454e;--wine:#8b3a46;--dark:#323232;--darker:#282828;--pink:#e7a3b1;--soft:#c9707f}
 *{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
 body{font-family:'Poppins','Cairo',sans-serif;background:var(--dark);color:#eee;overflow-x:hidden}
 img{display:block;max-width:100%}
-button{font:inherit;cursor:pointer;color:inherit}
+button{font:inherit;cursor:pointer;color:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 
 nav{position:fixed;inset:0 0 auto 0;height:44px;background:#2a2a2a;display:flex;justify-content:flex-end;align-items:center;gap:22px;padding:0 24px;z-index:50}
 nav button{background:none;border:none;color:#9a9a9a;font-size:12px;transition:color .2s}
 nav button.active,nav button:hover{color:#fff}
 
-.page{display:none;min-height:100vh;padding-top:44px}
+.page{display:none;min-height:100vh;min-height:100svh;padding-top:44px}
 .page.active{display:block;animation:fadeIn .8s ease}
-.pill{background:transparent;border:1.5px solid currentColor;border-radius:999px;padding:4px 18px;font-size:13px;transition:transform .25s,background .25s}
+.pill{background:transparent;border:1.5px solid currentColor;border-radius:999px;padding:5px 20px;font-size:13px;transition:transform .25s,background .25s}
 .pill:hover{transform:scale(1.06);background:rgba(255,255,255,.08)}
 .end-row{width:100%;display:flex;justify-content:flex-end}
 
-/* ---------- page 1 ---------- */
+/* ---------- page 1 : opening ---------- */
 #p1{background:var(--cream);color:var(--wine)}
-.hero{min-height:calc(100vh - 44px);display:flex;align-items:center;justify-content:space-evenly;flex-wrap:wrap;gap:40px;padding:40px 6vw}
+.hero{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:flex;align-items:center;justify-content:space-evenly;flex-wrap:wrap;gap:40px;padding:40px 6vw}
 .hero-title{font-family:'Amatic SC','Cairo',cursive;font-weight:700;font-size:clamp(56px,9vw,104px);line-height:1.15;display:flex;flex-direction:column}
 .hero-title span{opacity:0;animation:rise .9s ease forwards}
 .hero-title span:nth-child(1){padding-inline-start:.8em}
@@ -36,8 +145,8 @@ nav button.active,nav button:hover{color:#fff}
 .face-wrap .face{width:100%;aspect-ratio:1;object-fit:contain}
 .hat{position:absolute;width:32%;top:-24%;right:4%;transform-origin:50% 90%;animation:wiggle 2.6s ease-in-out infinite}
 
-/* ---------- page 2 ---------- */
-.sec{min-height:calc(100vh - 44px);display:flex;align-items:center;justify-content:center;padding:70px 6vw}
+/* ---------- page 2 : traits / polaroids / letter ---------- */
+.sec{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:flex;align-items:center;justify-content:center;padding:70px 6vw}
 .traits{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:5vw;width:100%;max-width:1000px}
 .trait-col{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(26px,5vh,44px)}
 .trait-col.left{align-items:flex-end}
@@ -70,9 +179,52 @@ nav button.active,nav button:hover{color:#fff}
 .mini{width:clamp(48px,8vw,62px);aspect-ratio:1;object-fit:cover;filter:grayscale(1);border:2px solid #ddd;box-shadow:0 4px 12px rgba(0,0,0,.45);transition:.35s;position:relative}
 .mini:hover{filter:none;transform:scale(1.6) rotate(-4deg);z-index:5}
 
-/* ---------- page 3 : voice ---------- */
-#p3{background:var(--darker)}
-.voice{min-height:calc(100vh - 44px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:50px 6vw;text-align:center}
+/* ---------- page 3 : gallery ---------- */
+#p3{background:var(--cream);color:var(--wine)}
+.gallery{max-width:1100px;margin:0 auto;padding:60px 6vw 70px;text-align:center}
+.g-title{font-family:'Amatic SC','Cairo',cursive;font-weight:700;font-size:clamp(44px,6vw,72px);line-height:1.1}
+.g-sub{font-family:'Libre Baskerville','Amiri',serif;font-style:italic;font-size:15px;color:#9b5c66;margin:8px 0 50px}
+.g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:50px 34px;margin-bottom:44px}
+.g-card{position:relative;background:#fff;border:none;padding:12px 12px 16px;box-shadow:0 10px 24px rgba(80,30,40,.18);transform:rotate(var(--r));transition:transform .35s;text-align:center}
+.page.active .g-card{animation:cardIn .7s ease backwards;animation-delay:var(--d)}
+.g-card:hover{transform:rotate(0) scale(1.05);z-index:2}
+.g-card img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.tape{position:absolute;top:-12px;left:50%;width:84px;height:24px;transform:translateX(-50%) rotate(-3deg);background:rgba(231,163,177,.65)}
+.g-cap{display:block;margin-top:12px;font-family:'Caveat','Aref Ruqaa',cursive;font-size:21px;line-height:1.25;color:#6b2f3a}
+.lightbox{position:fixed;inset:0;background:rgba(20,10,12,.88);display:flex;align-items:center;justify-content:center;padding:30px;z-index:80;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.on{opacity:1;pointer-events:auto}
+.lightbox figure{background:#fff;padding:14px 14px 18px;max-width:min(520px,90vw);transform:scale(.92);transition:transform .3s}
+.lightbox.on figure{transform:none}
+.lightbox img{width:100%;max-height:70vh;object-fit:contain}
+.lightbox figcaption{margin-top:12px;font-family:'Caveat','Aref Ruqaa',cursive;font-size:24px;color:#6b2f3a;text-align:center}
+
+/* ---------- page 4 : message ---------- */
+#p4{background:var(--dark)}
+.msg{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:60px 6vw}
+.env-wrap{display:flex;flex-direction:column;align-items:center;gap:24px}
+.env-wrap.gone{display:none}
+.envelope{position:relative;width:min(340px,80vw);aspect-ratio:3/2;cursor:pointer;perspective:900px;animation:float 4s ease-in-out infinite}
+.envelope.open{animation:none}
+.env-back{position:absolute;inset:0;background:#6f3540;border-radius:8px;box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.env-paper{position:absolute;left:7%;right:7%;top:8%;height:82%;background:#fbf6f0;border-radius:4px;z-index:1;transition:transform .8s ease .45s}
+.env-front{position:absolute;inset:0;background:#8f4651;border-radius:8px;clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);z-index:2}
+.env-flap{position:absolute;left:0;right:0;top:0;height:62%;background:#a0525e;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;z-index:3;transition:transform .6s ease,z-index 0s .3s}
+.env-seal{position:absolute;left:50%;top:58%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--soft);color:#fff;display:grid;place-items:center;font-size:20px;z-index:4;box-shadow:0 3px 8px rgba(0,0,0,.3);transition:opacity .3s}
+.envelope.open .env-flap{transform:rotateX(180deg);z-index:0}
+.envelope.open .env-seal{opacity:0}
+.envelope.open .env-paper{transform:translateY(-48%)}
+.env-hint{font-size:13px;color:#bdbdbd;letter-spacing:.5px}
+.paper{display:none;width:min(640px,92vw);background:#fbf6f0;color:#4a2a30;border-radius:6px;padding:46px 42px 40px;box-shadow:0 25px 60px rgba(0,0,0,.5);--lh:36px;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--lh) - 1px),#ead9d5 calc(var(--lh) - 1px),#ead9d5 var(--lh));background-position:0 46px;font-family:'Caveat','Aref Ruqaa',cursive;font-size:25px;line-height:var(--lh)}
+.paper.show{display:block;animation:paperIn .9s ease}
+.paper p{margin:0 0 var(--lh);opacity:0;transition:opacity 1s ease}
+.paper.reveal p{opacity:1}
+.paper .m-to{font-weight:600}
+.paper .m-body{white-space:pre-line}
+.paper .m-from{text-align:end;margin-bottom:0;font-weight:600}
+
+/* ---------- page 5 : voice ---------- */
+#p5{background:var(--darker)}
+.voice{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:50px 6vw;text-align:center}
 .voice h2{font-family:'Playfair Display','Amiri',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4.2vw,46px);color:#f3e3e6}
 .voice .sub{color:#a9a9a9;font-size:14px;margin-top:-12px}
 .record{position:relative;width:clamp(200px,30vw,270px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:repeating-radial-gradient(circle,#151515 0 2px,#1f1f1f 2px 4px);box-shadow:0 22px 50px rgba(0,0,0,.55),inset 0 0 0 6px #0d0d0d;animation:spin 7s linear infinite paused}
@@ -86,21 +238,21 @@ nav button.active,nav button:hover{color:#fff}
 .play-btn{width:64px;height:64px;border-radius:50%;border:none;background:var(--maroon);display:grid;place-items:center;box-shadow:0 8px 24px rgba(134,69,78,.55);transition:transform .25s}
 .play-btn:hover{transform:scale(1.08)}
 .play-btn svg{width:26px;height:26px;fill:#fff}
-.progress{width:min(360px,80vw);height:5px;background:#474747;border-radius:5px;overflow:hidden;cursor:pointer}
+.progress{width:min(360px,80vw);height:6px;background:#474747;border-radius:6px;overflow:hidden;cursor:pointer}
 .progress div{height:100%;width:0;background:var(--pink);transition:width .25s linear}
 .time{font-size:12px;color:#9a9a9a;margin-top:-12px}
 
-/* ---------- page 4 : songs ---------- */
-#p4{background:var(--maroon)}
-.songs{min-height:calc(100vh - 44px);display:grid;grid-template-columns:minmax(200px,330px) 1fr;gap:6vw;align-items:center;padding:50px 6vw;max-width:1150px;margin:0 auto}
+/* ---------- page 6 : songs ---------- */
+#p6{background:var(--maroon)}
+.songs{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:grid;grid-template-columns:minmax(200px,330px) 1fr;gap:6vw;align-items:center;padding:50px 6vw;max-width:1150px;margin:0 auto}
 .songs-photo{position:relative}
 .songs-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(1) contrast(1.05);border:3px solid #2b2b2b;box-shadow:0 18px 40px rgba(0,0,0,.35)}
 .sq{position:absolute;width:6%;aspect-ratio:1;background:rgba(231,163,177,.8);animation:twinkle 3s ease-in-out infinite}
 .songs-head{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:40px}
 .songs-head h2{font-family:'Playfair Display','Amiri',serif;font-weight:400;font-size:clamp(54px,7vw,86px);line-height:.9;color:#f3e5e7}
 .songs-head span{color:#e6c2c8;font-size:16px;line-height:1.35;padding-bottom:8px}
-.covers{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(22px,4vw,50px) clamp(26px,6vw,80px)}
-.cover{position:relative;width:clamp(84px,10vw,112px);background:none;border:none;padding:0;transition:transform .3s}
+.covers{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(22px,3.5vw,44px) clamp(20px,4vw,48px)}
+.cover{position:relative;width:clamp(84px,9vw,108px);background:none;border:none;padding:0;transition:transform .3s}
 .page.active .cover{animation:pop .6s ease backwards;animation-delay:var(--d)}
 .cover:hover{transform:translateY(-6px) rotate(-2deg)}
 .cover img{width:100%;aspect-ratio:1;object-fit:cover;border:3px solid #f4f4f4;box-shadow:0 8px 20px rgba(0,0,0,.35)}
@@ -122,7 +274,7 @@ nav button.active,nav button:hover{color:#fff}
 #musicBtn:hover{transform:scale(1.08)}
 #musicBtn.off{opacity:.55}
 #musicBtn svg{width:20px;height:20px;fill:currentColor}
-#toast{position:fixed;left:50%;bottom:80px;transform:translate(-50%,20px);background:#111;color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.3s;z-index:70}
+#toast{position:fixed;left:50%;bottom:80px;transform:translate(-50%,20px);background:#111;color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.3s;z-index:90}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -132,33 +284,42 @@ nav button.active,nav button:hover{color:#fff}
 @keyframes morph{0%,100%{border-radius:43% 57% 52% 48%/45% 42% 58% 55%;transform:rotate(0)}33%{border-radius:58% 42% 45% 55%/55% 58% 42% 45%;transform:rotate(6deg)}66%{border-radius:48% 52% 60% 40%/40% 52% 48% 60%;transform:rotate(-5deg)}}
 @keyframes twinkle{0%,100%{transform:scale(.8);opacity:.6}50%{transform:scale(1.15);opacity:1}}
 @keyframes drop{from{opacity:0;transform:translateY(-40px) rotate(var(--r)) scale(1.1)}to{opacity:1;transform:rotate(var(--r))}}
+@keyframes cardIn{from{opacity:0;transform:translateY(30px) rotate(var(--r))}to{opacity:1;transform:rotate(var(--r))}}
+@keyframes paperIn{from{opacity:0;transform:translateY(40px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes bar{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
 @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 
+/* ---------- mobile ---------- */
 @media (max-width:760px){
-  nav{gap:14px;padding:0 14px}
+  nav{gap:10px;padding:0 12px;justify-content:center}
   nav button{font-size:11px}
   .hero{flex-direction:column;justify-content:center}
   .hero-title{align-items:center;text-align:center}
   .hero-title span{padding-inline-start:0!important}
+  .sec{padding:60px 5vw}
   .traits{grid-template-columns:1fr 1fr;row-gap:44px}
   .blob-wrap{grid-column:1/-1;order:-1;justify-self:center}
   .trait-col,.trait-col.left{align-items:center}
   .trait{left:0!important;right:0!important}
-  .memories{grid-template-columns:1fr}
+  .memories{grid-template-columns:1fr;gap:40px}
   .letter-inner{padding:22px 20px;font-size:14px}
-  .songs{grid-template-columns:1fr}
-  .songs-photo{max-width:230px;margin:0 auto}
-  .songs-head{justify-content:center}
+  .g-grid{grid-template-columns:repeat(2,1fr);gap:34px 18px}
+  .g-cap{font-size:18px}
+  .paper{padding:36px 24px 30px;--lh:32px;font-size:22px;background-position:0 36px}
+  .songs{grid-template-columns:1fr;gap:36px}
+  .songs-photo{max-width:180px;margin:0 auto}
+  .songs-head{justify-content:center;margin-bottom:28px}
+  .covers{gap:22px 20px}
+  .cover{width:84px}
 }
 </style>
 </head>
 <body>
 <nav id="nav"></nav>
 
-<!-- ============ PAGE 1 ============ -->
+<!-- ============ PAGE 1 : OPENING ============ -->
 <section class="page active" id="p1">
   <div class="hero">
     <h1 class="hero-title" id="heroTitle" dir="auto"></h1>
@@ -179,12 +340,12 @@ nav button.active,nav button:hover{color:#fff}
           </g>
         </svg>
       </div>
-      <button class="pill" data-go="2">open me</button>
+      <button class="pill" data-go="2" data-label="open">open me</button>
     </div>
   </div>
 </section>
 
-<!-- ============ PAGE 2 ============ -->
+<!-- ============ PAGE 2 : TRAITS / POLAROIDS / LETTER ============ -->
 <section class="page" id="p2">
   <div class="sec observe">
     <div class="traits">
@@ -207,13 +368,41 @@ nav button.active,nav button:hover{color:#fff}
         <p class="letter-sign" id="letterSign"></p>
       </div></div>
       <div class="mini-row" id="miniRow"></div>
-      <div class="end-row"><button class="pill" data-go="3">next</button></div>
+      <div class="end-row"><button class="pill" data-go="3" data-label="next">next</button></div>
     </div>
   </div>
 </section>
 
-<!-- ============ PAGE 3 : VOICE ============ -->
+<!-- ============ PAGE 3 : GALLERY ============ -->
 <section class="page" id="p3">
+  <div class="gallery">
+    <h2 class="g-title" id="galleryTitle" dir="auto"></h2>
+    <p class="g-sub" id="gallerySub" dir="auto"></p>
+    <div class="g-grid" id="gGrid"></div>
+    <div class="end-row"><button class="pill" data-go="4" data-label="next">next</button></div>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 : MESSAGE ============ -->
+<section class="page" id="p4">
+  <div class="msg">
+    <div class="env-wrap" id="envWrap">
+      <div class="envelope" id="envelope">
+        <div class="env-back"></div>
+        <div class="env-paper"></div>
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+        <div class="env-seal">&#10084;</div>
+      </div>
+      <p class="env-hint" data-label="tapToOpen">tap to open</p>
+    </div>
+    <div class="paper" id="paper" dir="auto"></div>
+    <div class="end-row"><button class="pill" data-go="5" data-label="next">next</button></div>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 : VOICE ============ -->
+<section class="page" id="p5">
   <div class="voice">
     <h2 id="voiceTitle" dir="auto"></h2>
     <p class="sub" id="voiceSub" dir="auto"></p>
@@ -225,51 +414,54 @@ nav button.active,nav button:hover{color:#fff}
     </div>
     <div class="progress" id="vProg"><div id="vBar"></div></div>
     <div class="time" id="vTime">0:00 / 0:00</div>
-    <button class="pill" data-go="4">next</button>
+    <button class="pill" data-go="6" data-label="next">next</button>
   </div>
 </section>
 
-<!-- ============ PAGE 4 : SONGS ============ -->
-<section class="page" id="p4">
+<!-- ============ PAGE 6 : SONGS ============ -->
+<section class="page" id="p6">
   <div class="songs">
     <div class="songs-photo" id="songsPhoto"><img id="songsImg" alt=""></div>
     <div>
       <div class="songs-head"><h2 id="songsTitle"></h2><span id="songsSub"></span></div>
       <div class="covers" id="covers"></div>
       <div class="now" id="now"><span id="nowText"></span><div class="now-bar"><div id="nowBar"></div></div></div>
-      <div class="end-row"><button class="pill" data-go="3">back</button></div>
+      <div class="end-row"><button class="pill" data-go="5" data-label="back">back</button></div>
     </div>
   </div>
 </section>
 
+<div class="lightbox" id="lightbox"><figure><img id="lbImg" alt=""><figcaption id="lbCap" dir="auto"></figcaption></figure></div>
 <button id="musicBtn" aria-label="music on/off"></button>
 <div id="toast"></div>
-<audio id="bg" loop preload="auto"></audio>
+<audio id="bg" loop preload="auto" playsinline></audio>
 
-<script src="content.js"></script>
 <script>
-/* ده كود الموقع، مش محتاج تلمسه. كل الكلام في content.js */
 if (typeof CONFIG === 'undefined') {
-  document.body.innerHTML = '<div style="color:#fff;font-family:sans-serif;padding:40px;line-height:1.9;direction:rtl">فيه غلطة في ملف content.js<br>غالبًا علامة " أو فاصلة , اتمسحت بالغلط في آخر تعديل.</div>';
-  throw new Error('content.js error');
+  document.body.innerHTML = '<div style="color:#fff;font-family:sans-serif;padding:40px;line-height:1.9;direction:rtl">فيه غلطة في الجزء اللي فوق بتاع الكلام<br>غالبًا علامة " أو فاصلة , اتمسحت بالغلط في آخر تعديل.</div>';
+  throw new Error('CONFIG error');
 }
 
-const $ = id => document.getElementById(id);
-const PAGES = 4;
-const TX = Object.assign({ open: 'open me', next: 'next', back: 'back', nowPlaying: 'now playing' }, CONFIG.texts || {});
+const DEFAULTS = {
+  tabTitle: 'Happy Birthday', navLabels: [],
+  galleryTitle: 'a few of my favorite pictures of you', gallerySubtitle: '', gallery: [],
+  messageTo: '', message: '', messageFrom: ''
+};
+for (const k in DEFAULTS) if (CONFIG[k] === undefined) CONFIG[k] = DEFAULTS[k];
 
-document.title = CONFIG.tabTitle || 'Happy Birthday';
-document.querySelector('#p1 [data-go]').textContent = TX.open;
-document.querySelector('#p2 .end-row [data-go]').textContent = TX.next;
-document.querySelector('#p3 .voice > [data-go]').textContent = TX.next;
-document.querySelector('#p4 .end-row [data-go]').textContent = TX.back;
+const $ = id => document.getElementById(id);
+const PAGES = document.querySelectorAll('.page').length;
+const TX = Object.assign({ open: 'open me', next: 'next', back: 'back', nowPlaying: 'now playing', tapToOpen: 'tap to open' }, CONFIG.texts || {});
+
+document.title = CONFIG.tabTitle;
+document.querySelectorAll('[data-label]').forEach(el => { if (TX[el.dataset.label]) el.textContent = TX[el.dataset.label]; });
 
 function ph(label){
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="400" height="400" fill="#d8cdcd"/><text x="200" y="210" font-family="sans-serif" font-size="30" fill="#86454e" text-anchor="middle">${label}</text></svg>`);
 }
 function pic(src, label, cls = ''){
-  return `<img src="${src}" class="${cls}" alt="" onerror="this.onerror=null;this.src=ph('${label}')">`;
+  return `<img src="${src}" class="${cls}" alt="" loading="lazy" onerror="this.onerror=null;this.src=ph('${label}')">`;
 }
 function setImg(el, src, label){
   el.onerror = () => { el.onerror = null; el.src = ph(label); };
@@ -292,7 +484,8 @@ function fadeTo(a, target, ms, done){
 }
 
 /* ---- nav ---- */
-$('nav').innerHTML = CONFIG.navLabels.map((l, i) => `<button data-go="${i + 1}" class="${i === 0 ? 'active' : ''}">${l}</button>`).join('');
+$('nav').innerHTML = Array.from({ length: PAGES }, (_, i) =>
+  `<button data-go="${i + 1}" class="${i === 0 ? 'active' : ''}">${CONFIG.navLabels[i] || 'Page ' + (i + 1)}</button>`).join('');
 
 /* ---- page 1 ---- */
 $('heroTitle').innerHTML = CONFIG.heroLines.map((l, i) => `<span style="animation-delay:${0.2 + i * 0.35}s">${l}</span>`).join('');
@@ -343,7 +536,52 @@ $('letterBody').textContent = CONFIG.letter.trim();
 $('letterSign').textContent = CONFIG.letterSign;
 $('miniRow').innerHTML = CONFIG.letterPhotos.map((s, i) => pic(s, 'pic ' + (i + 1), 'mini')).join('');
 
-/* ---- page 3 ---- */
+/* ---- page 3 : gallery ---- */
+$('galleryTitle').textContent = CONFIG.galleryTitle;
+$('gallerySub').textContent = CONFIG.gallerySubtitle;
+const ROT = [-3, 2, -1.5, 3, -2.5, 1.5];
+$('gGrid').innerHTML = CONFIG.gallery.map((g, i) => `
+  <button class="g-card" style="--r:${ROT[i % ROT.length]}deg;--d:${(i * 0.1).toFixed(2)}s">
+    <span class="tape"></span>
+    ${pic(g.photo, 'photo ' + (i + 1))}
+    ${g.caption ? `<span class="g-cap" dir="auto">${g.caption}</span>` : ''}
+  </button>`).join('');
+document.querySelectorAll('.g-card').forEach(card => card.addEventListener('click', () => {
+  $('lbImg').src = card.querySelector('img').src;
+  const cap = card.querySelector('.g-cap');
+  $('lbCap').textContent = cap ? cap.textContent : '';
+  $('lightbox').classList.add('on');
+}));
+$('lightbox').addEventListener('click', () => $('lightbox').classList.remove('on'));
+
+/* ---- page 4 : message ---- */
+const paper = $('paper');
+let delay = 0.3;
+function addP(txt, cls){
+  if (!txt) return;
+  const p = document.createElement('p');
+  p.className = cls;
+  p.textContent = txt;
+  p.style.transitionDelay = delay.toFixed(2) + 's';
+  delay += 0.8;
+  paper.appendChild(p);
+}
+addP(CONFIG.messageTo, 'm-to');
+CONFIG.message.trim().split(/\n\s*\n/).forEach(t => addP(t.trim(), 'm-body'));
+addP(CONFIG.messageFrom, 'm-from');
+let envOpened = false;
+$('envelope').addEventListener('click', () => {
+  if (envOpened) return;
+  envOpened = true;
+  $('envelope').classList.add('open');
+  setTimeout(() => {
+    $('envWrap').classList.add('gone');
+    paper.classList.add('show');
+    setTimeout(() => paper.classList.add('reveal'), 60);
+  }, 1500);
+});
+
+/* ---- page 5 : voice ---- */
 $('voiceTitle').textContent = CONFIG.voiceTitle;
 $('voiceSub').textContent = CONFIG.voiceSubtitle;
 setImg($('voiceImg'), CONFIG.voicePhoto, 'photo');
@@ -351,14 +589,14 @@ const bars = n => Array.from({ length: n }, () => `<i style="--h:${Math.round(30
 $('waveL').innerHTML = bars(9);
 $('waveR').innerHTML = bars(9);
 
-/* ---- page 4 ---- */
+/* ---- page 6 : songs ---- */
 $('songsTitle').textContent = CONFIG.songsTitle;
 $('songsSub').innerHTML = CONFIG.songsSubtitle;
 setImg($('songsImg'), CONFIG.songsPhoto, 'photo');
 const SQ = [[8,-3],[3,10],[30,93],[46,96],[70,-4],[88,80],[96,40]];
 $('songsPhoto').insertAdjacentHTML('beforeend', SQ.map(([t, l], i) => `<span class="sq" style="top:${t}%;left:${l}%;animation-delay:${i * 0.35}s"></span>`).join(''));
 $('covers').innerHTML = CONFIG.songs.map((s, i) => `
-  <button class="cover" data-i="${i}" style="--d:${(i * 0.12).toFixed(2)}s">
+  <button class="cover" data-i="${i}" style="--d:${(i * 0.08).toFixed(2)}s">
     ${pic(s.cover, 'cover ' + (i + 1))}
     <span class="eq"><i></i><i></i><i></i></span>
     ${CONFIG.showSongTitles ? `<span class="cap" dir="auto">${s.title}</span>` : ''}
@@ -375,7 +613,9 @@ const bg = $('bg');
 bg.src = CONFIG.bgMusic;
 const voice = new Audio(CONFIG.voiceNote);
 voice.preload = 'metadata';
+voice.setAttribute('playsinline', '');
 const song = new Audio();
+song.setAttribute('playsinline', '');
 let started = false, musicOn = true, current = -1, playToken = 0;
 
 function playBg(){
@@ -466,6 +706,11 @@ function playSong(i){
   $('nowBar').style.width = '0%';
   markCovers();
 }
+song.addEventListener('loadedmetadata', () => {
+  if (current < 0) return;
+  const st = CONFIG.songs[current].start || 0;
+  if (Math.abs(song.currentTime - st) > 1) song.currentTime = st;
+});
 song.addEventListener('timeupdate', () => {
   if (current < 0) return;
   const s = CONFIG.songs[current];
@@ -485,6 +730,7 @@ function go(n){
   n = Math.min(PAGES, Math.max(1, n));
   stopSong(false);
   voice.pause();
+  $('lightbox').classList.remove('on');
   document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i + 1 === n));
   document.querySelectorAll('nav button').forEach((b, i) => b.classList.toggle('active', i + 1 === n));
   window.scrollTo(0, 0);
@@ -500,7 +746,7 @@ document.addEventListener('click', e => {
 /* ---- scroll animations ---- */
 const io = new IntersectionObserver(entries => entries.forEach(en => {
   if (en.isIntersecting) en.target.classList.add('show');
-}), { threshold: 0.2 });
+}), { threshold: 0.15 });
 document.querySelectorAll('.observe').forEach(el => io.observe(el));
 </script>
 </body>
