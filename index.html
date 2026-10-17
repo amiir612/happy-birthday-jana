@@ -112,13 +112,15 @@ Take your time, this page is only for her.
   /* ================= الصفحة ٧ : التورتة ================= */
   finaleTitle: `make a wish, ${NAME}`,
   age: 21,                  // الرقم اللي هيطلع شمع على التورتة
-  candleColor: "#a96fe3",   // لون الشمع (بنفسجي)
+  candleColor: "#9b59d9",   // لون الشمع (بنفسجي)
+  candleColor2: "#bf94ee",  // لون الخطوط اللي على الشمع (لو عايزه سادة حط نفس اللون اللي فوق)
   cakePurple: false,        // true = التورتة نفسها كمان تبقى بنفسجي
   finaleText: "Happy 21st birthday. I hope this year gives you everything you deserve, and more."
 };
 /* ============ خلص الكلام، اللي تحت ده كود الموقع ============ */
 document.documentElement.classList.add('theme-' + (CONFIG.theme || 'maroon'));
 if (CONFIG.candleColor) document.documentElement.style.setProperty('--candle', CONFIG.candleColor);
+if (CONFIG.candleColor2) document.documentElement.style.setProperty('--candle2', CONFIG.candleColor2);
 </script>
 
 <title>Happy Birthday</title>
@@ -133,7 +135,7 @@ if (CONFIG.candleColor) document.documentElement.style.setProperty('--candle', C
   --ink:#6b2f3a;--ink-soft:#9b5c66;--paper-ink:#4a2a30;--paper-line:#ead9d5;--paper:#fbf6f0;--plate:#e9e2df;
   --tint:#f6dfe3;--tint-text:#f8ecee;
   --dark:#323232;--darker:#282828;--nav:#2a2a2a;--finale-bg:#3a2a2d;--hat:#d8262b;
-  --candle:var(--accent);
+  --candle:var(--accent);--candle2:#fff;
 }
 html.theme-purple{
   --cream:#f3eef8;--main:#6a4c93;--deep:#4e2d74;--accent:#c9a8f0;--soft:#b48ae6;--blob:#7b2cbf;
@@ -308,10 +310,10 @@ nav button.active,nav button:hover{color:#fff}
 .cake{position:relative;width:min(290px,76vw);display:flex;flex-direction:column;align-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .candles{width:62%;height:76px;display:flex;justify-content:space-evenly;align-items:flex-end}
 .candles.nums{height:104px;justify-content:center;gap:4px}
-.candle{position:relative;width:10px;border-radius:3px 3px 0 0;background:repeating-linear-gradient(-45deg,#fff 0 6px,var(--candle) 6px 12px)}
+.candle{position:relative;width:10px;border-radius:3px 3px 0 0;background:repeating-linear-gradient(-45deg,var(--candle2) 0 6px,var(--candle) 6px 12px)}
 .candle::before{content:"";position:absolute;top:-7px;left:50%;width:2px;height:7px;margin-left:-1px;background:#3a3a3a}
 .candle.num{width:auto;background:none;border-radius:0}
-.candle.num .digit{display:block;font-family:'Fredoka','Poppins',sans-serif;font-weight:700;font-size:76px;line-height:.8;background:repeating-linear-gradient(-45deg,#fff 0 7px,var(--candle) 7px 14px);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:2px #fff;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+.candle.num .digit{display:block;font-family:'Fredoka','Poppins',sans-serif;font-weight:700;font-size:76px;line-height:.8;background:repeating-linear-gradient(-45deg,var(--candle2) 0 7px,var(--candle) 7px 14px);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 4px rgba(0,0,0,.4))}
 .flame{position:absolute;bottom:calc(100% + 5px);left:50%;width:12px;height:24px;margin-left:-6px;border-radius:50% 50% 45% 45%/60% 60% 40% 40%;background:radial-gradient(ellipse at 50% 72%,#fffbe0 0 18%,#ffd45c 38%,#ff9a3c 66%,rgba(255,120,40,0) 72%);filter:drop-shadow(0 0 8px rgba(255,190,80,.9));transform-origin:50% 100%;animation:flicker .14s ease-in-out infinite alternate;transition:opacity .35s,transform .35s}
 .candle.num .flame{width:14px;height:28px;margin-left:-7px}
 .smoke{position:absolute;bottom:calc(100% + 8px);left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:rgba(225,225,225,.55);opacity:0;pointer-events:none}
@@ -533,7 +535,7 @@ const DEFAULTS = {
   tabTitle: 'Happy Birthday', navLabels: [],
   galleryTitle: 'a few of my favorite pictures of you', gallerySubtitle: '', gallery: [],
   messageTo: '', message: '', messageFrom: '',
-  finaleTitle: 'make a wish', age: '', candles: 5, candleColor: '', cakePurple: false, finaleText: ''
+  finaleTitle: 'make a wish', age: '', candles: 5, candleColor: '', candleColor2: '', cakePurple: false, finaleText: ''
 };
 for (const k in DEFAULTS) if (CONFIG[k] === undefined) CONFIG[k] = DEFAULTS[k];
 
@@ -585,7 +587,7 @@ function resizeCv(){
 addEventListener('resize', resizeCv); resizeCv();
 const rootStyle = getComputedStyle(document.documentElement);
 const CCOLORS = ['--accent', '--soft', '--main', '--tint'].map(v => rootStyle.getPropertyValue(v).trim()).concat(['#e8c547', '#ffffff']);
-const CAKE_COLORS = CCOLORS.concat(CONFIG.candleColor ? [CONFIG.candleColor, CONFIG.candleColor] : []);
+const CAKE_COLORS = CCOLORS.concat([CONFIG.candleColor, CONFIG.candleColor2, CONFIG.candleColor].filter(Boolean));
 function confetti(x, y, n = 140, colors = CCOLORS){
   for (let i = 0; i < n; i++){
     const a = Math.random() * Math.PI * 2, sp = 4 + Math.random() * 8;
