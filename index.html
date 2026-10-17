@@ -13,7 +13,7 @@
    ===================================================== */
 
 const NAME = "Jana";   // اسمها
-const ME   = "Amir";     // اسمك
+const ME   = "Amir";   // اسمك
 
 const CONFIG = {
   theme: "maroon",     // ألوان الموقع: "maroon" النبيتي  أو  "purple" بنفسجي
@@ -62,12 +62,12 @@ A little note before you keep going: today is all about you, and I hope every pa
   /* ================= الصفحة ٣ : صورها ================= */
   galleryTitle: "a few of my favorite pictures of you",
   gallerySubtitle: "tap any photo",
-  // كل سطر = صورة + الكلام اللي تحتها. عايز تزود صورة؟ انسخ سطر والصقه تحته
+  // كل سطر = صورة (وممكن تزود caption: "كلام" علشان يظهر تحتها)
   gallery: [
     { photo: "g1.jpg" },
     { photo: "g2.jpg" },
     { photo: "g3.jpg" },
-    { photo: "g4.jpg"}
+    { photo: "g4.jpg" }
   ],
 
   /* ================= الصفحة ٤ : الرسالة ================= */
@@ -94,8 +94,8 @@ Take your time, this page is only for her.
   songsPhoto: "songs.jpg",
   showSongTitles: true,
   // start و end بالثواني = الجزء اللي هيشتغل (مثلاً 1:05 تبقى 65)
+  // لو الملف نفسه مقطع قصير خليه start: 0, end: 0 وهيشتغل كله
   songs: [
-    songs: [
     { title: "We Are the People", artist: "Empire of the Sun", cover: "cover1.jpg", file: "song1.mp3", start: 0, end: 30 },
     { title: "A Thousand Years", artist: "Christina Perri", cover: "cover2.jpg", file: "song2.mp3", start: 0, end: 30 },
     { title: "Photograph", artist: "Ed Sheeran", cover: "cover3.jpg", file: "song3.mp3", start: 0, end: 30 },
@@ -542,8 +542,10 @@ nav button.active,nav button:hover{color:#fff}
 <audio id="bg" loop preload="auto" playsinline></audio>
 
 <script>
-if (typeof CONFIG === 'undefined') {
-  document.body.innerHTML = '<div style="color:#fff;font-family:sans-serif;padding:40px;line-height:1.9;direction:rtl">فيه غلطة في الجزء اللي فوق بتاع الكلام<br>غالبًا علامة " أو فاصلة , اتمسحت بالغلط في آخر تعديل.</div>';
+let CONFIG_OK = false;
+try { CONFIG_OK = typeof CONFIG !== 'undefined'; } catch (e) { CONFIG_OK = false; }
+if (!CONFIG_OK) {
+  document.body.innerHTML = '<div style="color:#fff;font-family:sans-serif;padding:40px;line-height:1.9;direction:rtl">فيه غلطة في الجزء اللي فوق بتاع الكلام<br>غالبًا علامة " أو فاصلة , اتمسحت، أو كلمة اتكررت، أو اسم اتكتب غلط (زي Me بدل ME).<br>ارجع لآخر سطر عدلته وراجعه.</div>';
   throw new Error('CONFIG error');
 }
 
