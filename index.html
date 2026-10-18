@@ -176,6 +176,23 @@ body{font-family:'Poppins','Cairo',sans-serif;background:var(--dark);color:#eee;
 img{display:block;max-width:100%}
 button{font:inherit;cursor:pointer;color:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 
+/* ---------- gate : countdown / new age ---------- */
+.gate{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:30px 6vw;background:radial-gradient(ellipse at 50% 35%,var(--main) 0%,var(--darker) 75%);color:#fff;text-align:center;overflow-y:auto;transition:opacity 1s ease,visibility 0s linear 1s}
+.gate.leave{opacity:0;visibility:hidden}
+.gate.gone{display:none}
+.gate-box{max-width:620px;display:flex;flex-direction:column;align-items:center;gap:16px;animation:rise 1s ease}
+.gate-kicker{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
+.gate-title{font-family:'Caveat','Aref Ruqaa',cursive;font-weight:600;font-size:clamp(38px,7vw,68px);line-height:1.05;color:var(--tint-text)}
+.gate-sub{font-size:14px;color:#e6d3d7}
+.gate-count{display:flex;gap:clamp(8px,2vw,16px);justify-content:center;flex-wrap:wrap}
+.cd-b{min-width:clamp(64px,16vw,96px);padding:12px 8px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)}
+.cd-b b{display:block;font-family:'Fredoka','Poppins',sans-serif;font-weight:700;font-size:clamp(30px,7vw,48px);line-height:1}
+.cd-b span{display:block;margin-top:6px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#d9c3c8}
+.gate-note{font-size:14px;color:#e6d3d7}
+.gate-stats{display:flex;flex-direction:column;gap:6px;font-family:'Libre Baskerville','Amiri',serif;font-style:italic;font-size:14px;color:#f3e3e6}
+.gate-btn{margin-top:8px;border:none;border-radius:999px;background:#fff;color:var(--deep);font-size:16px;padding:12px 30px;box-shadow:0 10px 26px rgba(0,0,0,.35);animation:pulse 2s ease-in-out infinite}
+.gate-btn[hidden]{display:none}
+
 nav{position:fixed;inset:0 0 auto 0;height:44px;background:var(--nav);display:flex;justify-content:flex-end;align-items:center;gap:22px;padding:0 24px;z-index:50}
 nav button{background:none;border:none;color:#9a9a9a;font-size:12px;transition:color .2s}
 nav button.active,nav button:hover{color:#fff}
@@ -253,8 +270,27 @@ nav button.active,nav button:hover{color:#fff}
 .lightbox img{width:100%;max-height:70vh;object-fit:contain}
 .lightbox figcaption{margin-top:12px;font-family:'Caveat','Aref Ruqaa',cursive;font-size:24px;color:var(--ink);text-align:center}
 
-/* ---------- page 4 : message ---------- */
-#p4{background:var(--dark)}
+/* ---------- page 4 : 21 reasons ---------- */
+#p4{background:var(--tint);color:var(--deep)}
+.reasons{max-width:980px;margin:0 auto;padding:56px 5vw 70px;text-align:center}
+.r-title{font-family:'Amatic SC','Cairo',cursive;font-weight:700;font-size:clamp(42px,6vw,70px);line-height:1.1}
+.r-sub{font-family:'Libre Baskerville','Amiri',serif;font-style:italic;font-size:14px;color:var(--ink-soft);margin:6px 0 34px}
+.r-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:14px}
+.rcard{position:relative;aspect-ratio:3/4;perspective:800px;background:none;border:none;padding:0}
+.page.active .rcard{animation:pop .5s ease backwards;animation-delay:var(--d)}
+.rinner{position:absolute;inset:0;transition:transform .6s cubic-bezier(.3,.7,.3,1.2);transform-style:preserve-3d}
+.rcard.flip .rinner{transform:rotateY(180deg)}
+.rface{position:absolute;inset:0;border-radius:12px;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;box-shadow:0 8px 18px rgba(80,30,40,.2)}
+.rfront{background:var(--main);color:#fff}
+.rfront b{font-family:'Fredoka','Poppins',sans-serif;font-weight:700;font-size:clamp(24px,3vw,32px);line-height:1}
+.rfront i{font-style:normal;font-size:14px;color:var(--accent);margin-top:4px}
+.rback{background:#fff;color:var(--ink);transform:rotateY(180deg);font-family:'Caveat','Aref Ruqaa',cursive;font-size:clamp(15px,1.7vw,19px);line-height:1.15;overflow:hidden}
+.r-count{margin-top:22px;font-size:13px;color:var(--ink-soft)}
+.r-done{min-height:1.4em;margin:6px 0 20px;font-family:'Caveat','Aref Ruqaa',cursive;font-size:clamp(28px,4vw,40px);opacity:0;transition:opacity 1s}
+.r-done.on{opacity:1}
+
+/* ---------- page 5 : message ---------- */
+#p5{background:var(--dark)}
 .msg{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:60px 6vw}
 .env-wrap{display:flex;flex-direction:column;align-items:center;gap:24px}
 .env-wrap.gone{display:none}
@@ -277,8 +313,8 @@ nav button.active,nav button:hover{color:#fff}
 .paper .m-body{white-space:pre-line}
 .paper .m-from{text-align:end;margin-bottom:0;font-weight:600}
 
-/* ---------- page 5 : voice ---------- */
-#p5{background:var(--darker)}
+/* ---------- page 6 : voice ---------- */
+#p6{background:var(--darker)}
 .voice{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:50px 6vw;text-align:center}
 .voice h2{font-family:'Playfair Display','Amiri',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4.2vw,46px);color:var(--tint-text)}
 .voice .sub{color:#a9a9a9;font-size:14px;margin-top:-12px}
@@ -297,8 +333,8 @@ nav button.active,nav button:hover{color:#fff}
 .progress div{height:100%;width:0;background:var(--accent);transition:width .25s linear}
 .time{font-size:12px;color:#9a9a9a;margin-top:-12px}
 
-/* ---------- page 6 : songs ---------- */
-#p6{background:var(--main)}
+/* ---------- page 7 : songs ---------- */
+#p7{background:var(--main)}
 .songs{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:grid;grid-template-columns:minmax(200px,330px) 1fr;gap:6vw;align-items:center;padding:50px 6vw;max-width:1150px;margin:0 auto}
 .songs-photo{position:relative}
 .songs-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;border:3px solid #2b2b2b;box-shadow:0 18px 40px rgba(0,0,0,.35)}
@@ -324,8 +360,8 @@ nav button.active,nav button:hover{color:#fff}
 .now-bar div{height:100%;width:0;background:#fff}
 .songs .end-row{margin-top:24px}
 
-/* ---------- page 7 : question ---------- */
-#p7{background:var(--cream);color:var(--deep)}
+/* ---------- page 8 : question ---------- */
+#p8{background:var(--cream);color:var(--deep)}
 .ask{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:50px 6vw;text-align:center}
 .ask-img{width:clamp(170px,26vw,260px);aspect-ratio:1;object-fit:cover;border-radius:22px;border:6px solid #fff;box-shadow:0 14px 34px rgba(80,30,40,.22);transform:rotate(-2deg)}
 .ask-q{font-family:'Amatic SC','Cairo',cursive;font-weight:700;font-size:clamp(44px,7vw,78px);line-height:1.05}
@@ -347,8 +383,8 @@ nav button.active,nav button:hover{color:#fff}
 .vbox video{display:block;max-width:100%;max-height:78vh;max-height:78svh;border-radius:18px;background:#000;box-shadow:0 25px 60px rgba(0,0,0,.6)}
 .vclose{position:absolute;top:-14px;right:-14px;width:40px;height:40px;border-radius:50%;border:none;background:#fff;color:#333;font-size:18px;box-shadow:0 6px 16px rgba(0,0,0,.4)}
 
-/* ---------- page 8 : cake ---------- */
-#p8{background:radial-gradient(ellipse at 50% 40%,var(--finale-bg) 0%,var(--darker) 70%)}
+/* ---------- page 9 : cake ---------- */
+#p9{background:radial-gradient(ellipse at 50% 40%,var(--finale-bg) 0%,var(--darker) 70%)}
 .finale{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:60px 6vw;text-align:center}
 .f-title{font-family:'Amatic SC','Cairo',cursive;font-weight:700;font-size:clamp(46px,7vw,80px);color:var(--tint);line-height:1.05}
 .f-hint{font-size:13px;color:#b9b9b9;transition:opacity .4s}
@@ -384,7 +420,7 @@ nav button.active,nav button:hover{color:#fff}
 .finale.done .f-hint{opacity:0}
 
 /* ---------- confetti / music button / toast ---------- */
-#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99}
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:101}
 #musicBtn{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:var(--deep);display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.3);z-index:60;transition:transform .2s,opacity .2s}
 #musicBtn:hover{transform:scale(1.08)}
 #musicBtn.off{opacity:.55}
@@ -410,8 +446,9 @@ nav button.active,nav button:hover{color:#fff}
 
 /* ---------- mobile ---------- */
 @media (max-width:760px){
-  nav{gap:7px;padding:0 8px;justify-content:center}
-  nav button{font-size:10.5px}
+  nav{gap:14px;padding:0 10px;justify-content:center}
+  nav button{font-size:0}
+  nav button::after{content:attr(data-num);font-size:13px}
   .hero{flex-direction:column;justify-content:center}
   .hero-title{align-items:center;text-align:center}
   .hero-title span{padding-inline-start:0!important}
@@ -424,6 +461,8 @@ nav button.active,nav button:hover{color:#fff}
   .letter-inner{padding:22px 20px;font-size:14px}
   .g-grid{grid-template-columns:repeat(2,1fr);gap:34px 18px}
   .g-cap{font-size:18px}
+  .r-grid{grid-template-columns:repeat(3,1fr);gap:12px}
+  .rback{font-size:16px}
   .paper{padding:36px 24px 30px;--lh:32px;font-size:22px;background-position:0 36px}
   .songs{grid-template-columns:1fr;gap:36px}
   .songs-photo{max-width:180px;margin:0 auto}
@@ -436,6 +475,20 @@ nav button.active,nav button:hover{color:#fff}
 </style>
 </head>
 <body>
+
+<!-- ============ GATE : COUNTDOWN / NEW AGE ============ -->
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <p class="gate-kicker" id="gateKicker"></p>
+    <h1 class="gate-title" id="gateTitle" dir="auto"></h1>
+    <p class="gate-sub" id="gateSub" dir="auto"></p>
+    <div class="gate-count" id="gateCount"></div>
+    <p class="gate-note" id="gateNote" dir="auto"></p>
+    <div class="gate-stats" id="gateStats"></div>
+    <button class="gate-btn" id="gateBtn" hidden></button>
+  </div>
+</div>
+
 <nav id="nav"></nav>
 
 <!-- ============ PAGE 1 : OPENING ============ -->
@@ -502,8 +555,20 @@ nav button.active,nav button:hover{color:#fff}
   </div>
 </section>
 
-<!-- ============ PAGE 4 : MESSAGE ============ -->
+<!-- ============ PAGE 4 : 21 REASONS ============ -->
 <section class="page" id="p4">
+  <div class="reasons">
+    <h2 class="r-title" id="reasonsTitle" dir="auto"></h2>
+    <p class="r-sub" id="reasonsSub" dir="auto"></p>
+    <div class="r-grid" id="rGrid"></div>
+    <p class="r-count" id="rCount"></p>
+    <p class="r-done" id="rDone" dir="auto"></p>
+    <div class="end-row"><button class="pill" data-go="5" data-label="next">next</button></div>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 : MESSAGE ============ -->
+<section class="page" id="p5">
   <div class="msg">
     <div class="env-wrap" id="envWrap">
       <div class="envelope" id="envelope">
@@ -516,12 +581,12 @@ nav button.active,nav button:hover{color:#fff}
       <p class="env-hint" data-label="tapToOpen">tap to open</p>
     </div>
     <div class="paper" id="paper" dir="auto"></div>
-    <div class="end-row"><button class="pill" data-go="5" data-label="next">next</button></div>
+    <div class="end-row"><button class="pill" data-go="6" data-label="next">next</button></div>
   </div>
 </section>
 
-<!-- ============ PAGE 5 : VOICE ============ -->
-<section class="page" id="p5">
+<!-- ============ PAGE 6 : VOICE ============ -->
+<section class="page" id="p6">
   <div class="voice">
     <h2 id="voiceTitle" dir="auto"></h2>
     <p class="sub" id="voiceSub" dir="auto"></p>
@@ -533,25 +598,25 @@ nav button.active,nav button:hover{color:#fff}
     </div>
     <div class="progress" id="vProg"><div id="vBar"></div></div>
     <div class="time" id="vTime">0:00 / 0:00</div>
-    <button class="pill" data-go="6" data-label="next">next</button>
+    <button class="pill" data-go="7" data-label="next">next</button>
   </div>
 </section>
 
-<!-- ============ PAGE 6 : SONGS ============ -->
-<section class="page" id="p6">
+<!-- ============ PAGE 7 : SONGS ============ -->
+<section class="page" id="p7">
   <div class="songs">
     <div class="songs-photo" id="songsPhoto"><img id="songsImg" alt=""></div>
     <div>
       <div class="songs-head"><h2 id="songsTitle"></h2><span id="songsSub"></span></div>
       <div class="covers" id="covers"></div>
       <div class="now" id="now"><span id="nowText"></span><div class="now-bar"><div id="nowBar"></div></div></div>
-      <div class="end-row"><button class="pill" data-go="7" data-label="next">next</button></div>
+      <div class="end-row"><button class="pill" data-go="8" data-label="next">next</button></div>
     </div>
   </div>
 </section>
 
-<!-- ============ PAGE 7 : QUESTION ============ -->
-<section class="page" id="p7">
+<!-- ============ PAGE 8 : QUESTION ============ -->
+<section class="page" id="p8">
   <div class="ask" id="ask">
     <img class="ask-img" id="askImg" alt="">
     <h2 class="ask-q" id="askQ" dir="auto"></h2>
@@ -561,13 +626,13 @@ nav button.active,nav button:hover{color:#fff}
     </div>
     <div class="ask-yes">
       <p class="yes-msg" id="yesMsg" dir="auto"></p>
-      <button class="pill" data-go="8" data-label="next">next</button>
+      <button class="pill" data-go="9" data-label="next">next</button>
     </div>
   </div>
 </section>
 
-<!-- ============ PAGE 8 : CAKE ============ -->
-<section class="page" id="p8">
+<!-- ============ PAGE 9 : CAKE ============ -->
+<section class="page" id="p9">
   <div class="finale" id="finale">
     <h2 class="f-title" id="finaleTitle" dir="auto"></h2>
     <p class="f-hint" data-label="blowHint">tap the cake to blow out the candles</p>
@@ -606,8 +671,21 @@ if (!CONFIG_OK) {
 
 const DEFAULTS = {
   tabTitle: 'Happy Birthday', navLabels: [],
+  birthDate: '2005-10-28', unlockAt: '2026-10-28T00:00',
+  gateLockedKicker: 'not yet…', gateLockedTitle: 'something is waiting for you, ' + NAME,
+  gateLockedSub: 'your gift opens in', gateLockedNote: 'come back at midnight 🤍',
+  gateOpenKicker: "it's your day", gateOpenTitle: "you're officially {age} 🎉",
+  gateOpenSub: "and you've been {age} for", gateBtnText: 'open your gift 🎁',
+  gateLabels: ['days', 'hours', 'min', 'sec'],
+  gateStatDays: 'days of being you', gateStatHours: 'hours of making the world prettier', gateStatBeats: 'heartbeats',
   galleryTitle: 'a few of my favorite pictures of you', gallerySubtitle: '', gallery: [],
+  reasonsTitle: '21 reasons why I love you', reasonsSubtitle: 'tap every card', reasonsDone: 'and a million more 💜',
+  reasons: ['your laugh', 'the way you say my name', 'your kind heart', 'how you make bad days better', 'your beautiful eyes',
+    'you always understand me', 'your silly jokes', 'how strong you are', 'the way you care for everyone', 'your voice',
+    'you make me want to be better', 'our late night talks', 'how honest you are', "your smile when you're shy", "you're my safe place",
+    'the way you get excited', 'how you believe in me', 'your patience with me', 'every memory with you', "you're my favorite person", "simply because you're you"],
   messageTo: '', message: '', messageFrom: '',
+  voiceNote: 'voice.m4a', voicePhoto: 'voice-photo.jpg',
   loveQuestion: 'do you still love me?',
   yesText: 'I knew it 💜',
   noTexts: ['are you sure?', 'really? 🥺', 'think again', 'wrong button', "you can't catch me 😜"],
@@ -690,7 +768,7 @@ function tickConfetti(){
 
 /* ---- nav ---- */
 $('nav').innerHTML = Array.from({ length: PAGES }, (_, i) =>
-  `<button data-go="${i + 1}" class="${i === 0 ? 'active' : ''}">${CONFIG.navLabels[i] || 'Page ' + (i + 1)}</button>`).join('');
+  `<button data-go="${i + 1}" data-num="${i + 1}" class="${i === 0 ? 'active' : ''}">${CONFIG.navLabels[i] || 'Page ' + (i + 1)}</button>`).join('');
 
 /* ---- page 1 ---- */
 $('heroTitle').innerHTML = CONFIG.heroLines.map((l, i) => `<span style="animation-delay:${0.2 + i * 0.35}s">${l}</span>`).join('');
@@ -763,7 +841,28 @@ document.querySelectorAll('.g-card').forEach(card => card.addEventListener('clic
 }));
 $('lightbox').addEventListener('click', () => $('lightbox').classList.remove('on'));
 
-/* ---- page 4 : message ---- */
+/* ---- page 4 : 21 reasons ---- */
+$('reasonsTitle').textContent = CONFIG.reasonsTitle;
+$('reasonsSub').textContent = CONFIG.reasonsSubtitle;
+const RS = Array.isArray(CONFIG.reasons) ? CONFIG.reasons : [];
+$('rGrid').innerHTML = RS.map((t, i) =>
+  `<button class="rcard" style="--d:${(i * 0.04).toFixed(2)}s"><span class="rinner"><span class="rface rfront"><b>${i + 1}</b><i>&#9829;</i></span><span class="rface rback" dir="auto">${t}</span></span></button>`).join('');
+const seenReasons = new Set();
+function updReasonCount(){ $('rCount').textContent = `${seenReasons.size} / ${RS.length}`; }
+updReasonCount();
+document.querySelectorAll('.rcard').forEach((c, i) => c.addEventListener('click', () => {
+  c.classList.toggle('flip');
+  if (seenReasons.has(i)) return;
+  seenReasons.add(i);
+  updReasonCount();
+  if (seenReasons.size === RS.length){
+    $('rDone').textContent = CONFIG.reasonsDone;
+    $('rDone').classList.add('on');
+    confetti(innerWidth / 2, innerHeight * 0.7, 170);
+  }
+}));
+
+/* ---- page 5 : message ---- */
 const paper = $('paper');
 function addP(txt, cls){
   if (!txt) return;
@@ -796,7 +895,7 @@ $('envelope').addEventListener('click', () => {
   }, 1500);
 });
 
-/* ---- page 5 : voice ---- */
+/* ---- page 6 : voice ---- */
 $('voiceTitle').textContent = CONFIG.voiceTitle;
 $('voiceSub').textContent = CONFIG.voiceSubtitle;
 setImg($('voiceImg'), CONFIG.voicePhoto, 'photo');
@@ -804,7 +903,7 @@ const bars = n => Array.from({ length: n }, () => `<i style="--h:${Math.round(30
 $('waveL').innerHTML = bars(9);
 $('waveR').innerHTML = bars(9);
 
-/* ---- page 6 : songs ---- */
+/* ---- page 7 : songs ---- */
 $('songsTitle').textContent = CONFIG.songsTitle;
 $('songsSub').innerHTML = CONFIG.songsSubtitle;
 setImg($('songsImg'), CONFIG.songsPhoto, 'photo');
@@ -817,7 +916,7 @@ $('covers').innerHTML = CONFIG.songs.map((s, i) => `
     ${CONFIG.showSongTitles ? `<span class="cap" dir="auto">${s.title}</span>` : ''}
   </button>`).join('');
 
-/* ---- page 8 : cake ---- */
+/* ---- page 9 : cake ---- */
 $('finaleTitle').textContent = CONFIG.finaleTitle;
 $('finaleText').textContent = CONFIG.finaleText;
 if (CONFIG.cakePurple) $('cake').classList.add('purple');
@@ -1004,7 +1103,7 @@ $('vclose').addEventListener('click', e => { e.stopPropagation(); closeVideo(); 
 vplayer.addEventListener('ended', closeVideo);
 vmodal.addEventListener('click', e => { if (e.target === vmodal) closeVideo(); });
 
-/* ---- page 7 : question ---- */
+/* ---- page 8 : question ---- */
 const askImg = $('askImg'), yesBtn = $('yesBtn'), noBtn = $('noBtn');
 askImg.onerror = () => { askImg.style.display = 'none'; };
 if (CONFIG.askPhoto) askImg.src = CONFIG.askPhoto; else askImg.style.display = 'none';
@@ -1067,14 +1166,102 @@ yesBtn.addEventListener('click', () => {
   if (CONFIG.yesVideo) showVideo(CONFIG.yesVideo);
 });
 
+/* ---- gate : countdown / new age ---- */
+const gate = $('gate');
+const PREVIEW = new URLSearchParams(location.search).has('preview');
+function parseDate(s){
+  const m = String(s || '').match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[T ](\d{1,2}):(\d{2}))?/);
+  return m ? new Date(+m[1], +m[2] - 1, +m[3], +(m[4] || 0), +(m[5] || 0)) : null;
+}
+const BIRTH = parseDate(CONFIG.birthDate), UNLOCK = parseDate(CONFIG.unlockAt);
+let gateTimer = null, gateState = '';
+function two(n){ return String(n).padStart(2, '0'); }
+function cdBlocks(ms, forceDays){
+  const s = Math.max(0, Math.floor(ms / 1000));
+  const d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60;
+  const L = CONFIG.gateLabels;
+  const ps = [];
+  if (d > 0 || forceDays) ps.push([d, L[0]]);
+  ps.push([h, L[1]], [m, L[2]], [sec, L[3]]);
+  return ps.map(([n, l]) => `<div class="cd-b"><b>${two(n)}</b><span>${l}</span></div>`).join('');
+}
+function ageInfo(now){
+  let years = now.getFullYear() - BIRTH.getFullYear();
+  let last = new Date(BIRTH); last.setFullYear(BIRTH.getFullYear() + years);
+  if (last > now){ years--; last = new Date(BIRTH); last.setFullYear(BIRTH.getFullYear() + years); }
+  return { years, since: now - last, total: now - BIRTH };
+}
+const fillAge = (s, a) => String(s).replace(/\{age\}/g, a);
+function renderGate(){
+  const now = new Date();
+  const locked = UNLOCK && now < UNLOCK && !PREVIEW;
+  if (locked){
+    if (gateState !== 'locked'){
+      gateState = 'locked';
+      $('gateKicker').textContent = CONFIG.gateLockedKicker;
+      $('gateTitle').textContent = CONFIG.gateLockedTitle;
+      $('gateSub').textContent = CONFIG.gateLockedSub;
+      $('gateNote').textContent = CONFIG.gateLockedNote;
+      $('gateStats').innerHTML = '';
+      $('gateBtn').hidden = true;
+    }
+    $('gateCount').innerHTML = cdBlocks(UNLOCK - now);
+    return;
+  }
+  if (gateState !== 'open'){
+    if (gateState === 'locked'){
+      confetti(innerWidth / 2, innerHeight * 0.4, 200);
+      confetti(innerWidth * 0.15, innerHeight * 0.85, 80);
+      confetti(innerWidth * 0.85, innerHeight * 0.85, 80);
+    }
+    gateState = 'open';
+    $('gateKicker').textContent = CONFIG.gateOpenKicker;
+    $('gateNote').textContent = '';
+    $('gateBtn').textContent = CONFIG.gateBtnText;
+    $('gateBtn').hidden = false;
+  }
+  const age = BIRTH ? ageInfo(now).years : (CONFIG.age || '');
+  $('gateTitle').textContent = fillAge(CONFIG.gateOpenTitle, age);
+  if (BIRTH){
+    const a = ageInfo(now);
+    $('gateSub').textContent = fillAge(CONFIG.gateOpenSub, a.years);
+    $('gateCount').innerHTML = cdBlocks(a.since, true);
+    const days = Math.floor(a.total / 86400000), hours = Math.floor(a.total / 3600000), beats = Math.floor(a.total / 60000) * 80;
+    $('gateStats').innerHTML = [
+      `${days.toLocaleString('en-US')} ${CONFIG.gateStatDays}`,
+      `${hours.toLocaleString('en-US')} ${CONFIG.gateStatHours}`,
+      `~${beats.toLocaleString('en-US')} ${CONFIG.gateStatBeats}`
+    ].map(t => `<span>${t}</span>`).join('');
+  } else {
+    $('gateSub').textContent = '';
+    $('gateCount').innerHTML = '';
+    $('gateStats').innerHTML = '';
+  }
+}
+if (BIRTH || UNLOCK){
+  renderGate();
+  gateTimer = setInterval(renderGate, 1000);
+} else {
+  gate.classList.add('gone');
+}
+$('gateBtn').addEventListener('click', () => {
+  started = true;
+  playBg();
+  confetti(innerWidth / 2, innerHeight * 0.6, 150);
+  gate.classList.add('leave');
+  clearInterval(gateTimer);
+  const h = $('heroTitle'); h.innerHTML = h.innerHTML;
+  setTimeout(() => gate.classList.add('gone'), 1100);
+});
+
 /* ---- navigation ---- */
 function go(n){
   n = Math.min(PAGES, Math.max(1, n));
   stopSong(false);
   voice.pause();
   $('lightbox').classList.remove('on');
-  if (n === 7 && !$('ask').classList.contains('done')) resetNo();
-  if (n === 8) resetCake();
+  if (n === 8 && !$('ask').classList.contains('done')) resetNo();
+  if (n === 9) resetCake();
   document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i + 1 === n));
   document.querySelectorAll('nav button').forEach((b, i) => b.classList.toggle('active', i + 1 === n));
   window.scrollTo(0, 0);
