@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR heart</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<style>
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;box-sizing:border-box;background:#2a2a2a;font-family:Poppins,sans-serif;color:#eee}
+#out{width:min(520px,92vw);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.btn{background:#fff;color:#86454e;text-decoration:none;padding:10px 28px;border-radius:999px;font-weight:500}
+#note{margin:0;font-size:13px;color:#aaa;text-align:center}
+canvas{display:none}
+</style>
+</head>
+<body>
+<img id="out" alt="">
+<a class="btn" id="dl" download="qr-heart-jana.png">download</a>
+<p id="note">on iPhone: press and hold the picture, then "Save to Photos"</p>
+<canvas id="c"></canvas>
+
+<script>
+/* ✏️ عدّل هنا لو حابب */
+const LINK    = "https://amiir612.github.io/happy-birthday-jana/";
+const TOP     = "for Jana 💜";
+const BOTTOM  = "scan me at midnight";
+const SMALL   = "28 · 10 · 2026";
+const COLOR   = "#86454e";   // لون نقط القلب
+const QRCOLOR = "#5e2b34";   // لون الـ QR نفسه (أغمق علشان يتقري بسهولة)
+const ACCENT  = "#9b59d9";   // لون القلب الصغير اللي في النص
+const BG      = "#f2ece9";   // لون الخلفية
+/* ============================== */
+
+function heartPath(cx, top, w){
+  const h = w * 0.92, p = new Path2D();
+  p.moveTo(cx, top + h * 0.28);
+  p.bezierCurveTo(cx, top, cx - w * 0.5, top, cx - w * 0.5, top + h * 0.3);
+  p.bezierCurveTo(cx - w * 0.5, top + h * 0.62, cx - w * 0.1, top + h * 0.78, cx, top + h);
+  p.bezierCurveTo(cx + w * 0.1, top + h * 0.78, cx + w * 0.5, top + h * 0.62, cx + w * 0.5, top + h * 0.3);
+  p.bezierCurveTo(cx + w * 0.5, top, cx, top, cx, top + h * 0.28);
+  p.closePath();
+  return p;
+}
+function rr(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+  ctx.fill();
+}
+let seed = 21;
+function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+
+(async function(){
+  if (typeof qrcode === 'undefined'){
+    document.getElementById('note').textContent = 'something did not load, refresh the page';
+    return;
+  }
+  try { await document.fonts.load('600 120px Caveat'); await document.fonts.load('500 40px Poppins'); } catch (e) {}
+
+  const qr = qrcode(0, 'Q');
+  qr.addData(LINK);
+  qr.make();
+  const N = qr.getModuleCount();
+
+  const W = 2000, H = 2400;
+  const cv = document.getElementById('c');
+  cv.width = W; cv.height = H;
+  const ctx = cv.getContext('2d');
+  ctx.fillStyle = BG;
+  ctx.fillRect(0, 0, W, H);
+
+  const HW = 1700, HH = HW * 0.92, HX = W / 2, HTOP = 420;
+  const heart = heartPath(HX, HTOP, HW);
+  const m = Math.floor(HW * 0.36 / (N + 4));
+  const size = N * m;
+  const x0 = Math.round(HX - size / 2);
+  const y0 = Math.round(HTOP + HW * 0.30 + 2 * m);
+  const qx1 = x0 - 2 * m, qy1 = y0 - 2 * m, qx2 = x0 + size + 2 * m, qy2 = y0 + size + 2 * m;
+
+  /* heart made of dots */
+  ctx.fillStyle = COLOR;
+  const startX = x0 - Math.ceil((x0 - (HX - HW / 2)) / m) * m;
+  const startY = y0 - Math.ceil((y0 - HTOP) / m) * m;
+  for (let y = startY; y < HTOP + HH; y += m){
+    for (let x = startX; x < HX + HW / 2; x += m){
+      const cx = x + m / 2, cy = y + m / 2;
+      if (cx > qx1 && cx < qx2 && cy > qy1 && cy < qy2) continue;
+      if (!ctx.isPointInPath(heart, cx, cy)) continue;
+      if (rnd() < 0.5) rr(ctx, x + m * 0.08, y + m * 0.08, m * 0.84, m * 0.84, m * 0.3);
+    }
+  }
+
+  /* the real QR */
+  ctx.fillStyle = QRCOLOR;
+  const isEye = (r, c) => (r < 7 && c < 7) || (r < 7 && c >= N - 7) || (r >= N - 7 && c < 7);
+  for (let r = 0; r < N; r++){
+    for (let c = 0; c < N; c++){
+      if (isEye(r, c) || !qr.isDark(r, c)) continue;
+      rr(ctx, x0 + c * m + m * 0.06, y0 + r * m + m * 0.06, m * 0.88, m * 0.88, m * 0.28);
+    }
+  }
+  function eye(ex, ey){
+    ctx.fillStyle = QRCOLOR; rr(ctx, ex, ey, 7 * m, 7 * m, m * 1.6);
+    ctx.fillStyle = BG;      rr(ctx, ex + m, ey + m, 5 * m, 5 * m, m * 1.1);
+    ctx.fillStyle = QRCOLOR; rr(ctx, ex + 2 * m, ey + 2 * m, 3 * m, 3 * m, m * 0.8);
+  }
+  eye(x0, y0);
+  eye(x0 + (N - 7) * m, y0);
+  eye(x0, y0 + (N - 7) * m);
+
+  /* little heart in the middle */
+  if (N < 45){
+    const cs = 7 * m, ccx = x0 + size / 2, ccy = y0 + size / 2;
+    ctx.fillStyle = BG;
+    rr(ctx, ccx - cs / 2, ccy - cs / 2, cs, cs, m * 1.2);
+    const lw = 5.4 * m;
+    ctx.fillStyle = ACCENT;
+    ctx.fill(heartPath(ccx, ccy - lw * 0.46, lw));
+  }
+
+  /* text */
+  ctx.textAlign = 'center';
+  ctx.fillStyle = COLOR;
+  ctx.font = '600 160px Caveat, cursive';
+  ctx.fillText(TOP, W / 2, 290);
+  ctx.font = '600 120px Caveat, cursive';
+  ctx.fillText(BOTTOM, W / 2, HTOP + HH + 170);
+  ctx.font = '500 48px Poppins, sans-serif';
+  ctx.globalAlpha = 0.7;
+  ctx.fillText(SMALL, W / 2, HTOP + HH + 270);
+  ctx.globalAlpha = 1;
+
+  const url = cv.toDataURL('image/png');
+  document.getElementById('out').src = url;
+  document.getElementById('dl').href = url;
+})();
+</script>
+</body>
+</html>
