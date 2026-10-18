@@ -17,9 +17,12 @@ const ME   = "Amir";   // اسمك
 
 const CONFIG = {
   theme: "maroon",     // ألوان الموقع: "maroon" النبيتي  أو  "purple" بنفسجي
-  showIntro: false,
   tabTitle: "Happy 21st Birthday " + NAME,
-  navLabels: ["Page 1", "Page 2", "Page 3", "Page 4", "Page 5", "Page 6", "Page 7"],
+  navLabels: ["Page 1", "Page 2", "Page 3", "Page 4", "Page 5", "Page 6", "Page 7", "Page 8", "Page 9"],
+
+  // 🔒 تاريخ ميلادها (سنة-شهر-يوم) وامتى الموقع يفتح
+  birthDate: "2005-10-28",
+  unlockAt: "2026-10-28T00:00",
 
   // كلام الزراير
   texts: {
@@ -70,7 +73,33 @@ A little note before you keep going: today is all about you, and I hope every pa
     { photo: "g4.jpg" }
   ],
 
-  /* ================= الصفحة ٤ : الرسالة ================= */
+  /* ================= الصفحة ٤ : 21 سبب ================= */
+  reasonsTitle: "21 reasons why I love you",
+  reasons: [
+    "you're the kindest soul I know",
+    "your heart is pure, always",
+    "your laugh is my weakness",
+    "your eyes are the prettiest thing I've ever seen",
+    "I love every little detail of your face",
+    "the way you talk calms me down",
+    "you believe in me even when I don't",
+    "watching you succeed makes me so proud",
+    "nothing can stand between you and your dreams",
+    "you're beautiful, inside and out",
+    "it's impossible to know you and not love you",
+    "you rise no matter what life throws at you",
+    "you face the hardest days with so much grace",
+    "you're the home I want to come back to every day",
+    "you make every place warmer",
+    "with you, I feel safe",
+    "you listen to me like no one else does",
+    "you make ordinary days feel special",
+    "you make me want to be better",
+    "every moment with you is my favorite",
+    "because you're you, and there's no one like you 💜"
+  ],
+
+  /* ================= الصفحة ٥ : الرسالة ================= */
   messageTo: `To ${NAME},`,
   // اكتب براحتك مهما كانت طويلة، وسيب سطر فاضي بين كل فقرة والتانية
   message: `
@@ -82,13 +111,13 @@ Take your time, this page is only for her.
 `,
   messageFrom: `Yours, ${ME}`,
 
-  /* ================= الصفحة ٥ : الفويس ================= */
+  /* ================= الصفحة ٦ : الفويس ================= */
   voiceTitle: "a little voice note for you",
   voiceSubtitle: "press play and listen till the end",
   voicePhoto: "voice-photo.jpg",
   voiceNote: "voice.m4a",
 
-  /* ================= الصفحة ٦ : الأغاني ================= */
+  /* ================= الصفحة ٧ : الأغاني ================= */
   songsTitle: "Songs",
   songsSubtitle: "that remind me<br>of you",
   songsPhoto: "songs.jpg",
@@ -123,7 +152,7 @@ Take your time, this page is only for her.
     { title: "Me, Myself & I", artist: "G-Eazy", cover: "cover25.jpg", file: "song25.mp3", start: 0, end: 30 },
     { title: "Battamen Aleik", artist: "Amr Diab", cover: "cover26.jpg", file: "song26.mp3", start: 0, end: 30 },
     { title: "Zay Manty", artist: "Amr Diab", cover: "cover27.jpg", file: "song27.mp3", start: 0, end: 30 },
-         { title: "الحب وبس", artist: "فضل شاكر", cover: "cover28.jpg", file: "song28.mp3", start: 0, end: 30 },
+    { title: "الحب وبس", artist: "فضل شاكر", cover: "cover28.jpg", file: "song28.mp3", start: 0, end: 30 },
     { title: "وبحلفلك", artist: "شيرين", cover: "cover29.jpg", file: "song29.mp3", start: 0, end: 30 },
     { title: "اذا معك مبكون", artist: "أدهم نابلسي", cover: "cover30.jpg", file: "song30.mp3", start: 0, end: 30 },
     { title: "عامل ايه", artist: "نبيل", cover: "cover31.jpg", file: "song31.mp3", start: 0, end: 30 },
@@ -134,7 +163,11 @@ Take your time, this page is only for her.
     { title: "Perfect", artist: "Ed Sheeran", cover: "cover36.jpg", file: "song36.mp3", start: 0, end: 30 }
   ],
 
-  /* ================= الصفحة ٧ : التورتة ================= */
+  /* ================= الصفحة ٨ : do you still love me? ================= */
+  loveQuestion: "do you still love me?",
+  yesText: "I knew it 💜",
+
+  /* ================= الصفحة ٩ : التورتة ================= */
   finaleTitle: `make a wish, ${NAME}`,
   age: 21,                  // الرقم اللي هيطلع شمع على التورتة
   candleColor: "#9b59d9",   // لون الشمع (بنفسجي)
@@ -680,10 +713,7 @@ const DEFAULTS = {
   gateStatDays: 'days of being you', gateStatHours: 'hours of making the world prettier', gateStatBeats: 'heartbeats',
   galleryTitle: 'a few of my favorite pictures of you', gallerySubtitle: '', gallery: [],
   reasonsTitle: '21 reasons why I love you', reasonsSubtitle: 'tap every card', reasonsDone: 'and a million more 💜',
-  reasons: ['your laugh', 'the way you say my name', 'your kind heart', 'how you make bad days better', 'your beautiful eyes',
-    'you always understand me', 'your silly jokes', 'how strong you are', 'the way you care for everyone', 'your voice',
-    'you make me want to be better', 'our late night talks', 'how honest you are', "your smile when you're shy", "you're my safe place",
-    'the way you get excited', 'how you believe in me', 'your patience with me', 'every memory with you', "you're my favorite person", "simply because you're you"],
+  reasons: [],
   messageTo: '', message: '', messageFrom: '',
   voiceNote: 'voice.m4a', voicePhoto: 'voice-photo.jpg',
   loveQuestion: 'do you still love me?',
