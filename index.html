@@ -121,7 +121,7 @@ Take your time, this page is only for her.
 
   /* ================= الصفحة ٧ : الأغاني ================= */
   songsTitle: "Songs",
-  songsSubtitle: "that remind me<br>of you",
+  songsSubtitle: "that remind me of you<br><br><span style='font-size:14px; color:var(--accent); animation: pulse 1.5s infinite;'>🎧 tap any cover to listen 🎧</span>",
   songsPhoto: "songs.jpg",
   showSongTitles: true,
   // start و end بالثواني = الجزء اللي هيشتغل (مثلاً 1:05 تبقى 65)
@@ -171,7 +171,7 @@ Take your time, this page is only for her.
 
   /* ================= الصفحة ٩ : التورتة ================= */
   finaleTitle: `make a wish, ${NAME}`,
-  age: 21,                  // الرقم اللي هيطلع شمع على التورتة
+  age: 21,                 // الرقم اللي هيطلع شمع على التورتة
   candleColor: "#9b59d9",   // لون الشمع (بنفسجي)
   candleColor2: "#bf94ee",  // لون الخطوط اللي على الشمع (لو عايزه سادة حط نفس اللون اللي فوق)
   cakePurple: false,        // true = التورتة نفسها كمان تبقى بنفسجي
@@ -519,6 +519,23 @@ nav button.active,nav button:hover{color:#fff}
   .cover{width:84px}
   .candle.num .digit{font-size:66px}
   .vclose{top:-12px;right:-6px}
+}
+
+/* --- Added Vinyl Record Effect --- */
+.cover::after {
+  content: "";
+  position: absolute;
+  top: 5%; right: -15%;
+  width: 90%; height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #eee 4px, transparent 5px), repeating-radial-gradient(#151515 0 2px, #2a2a2a 3px 4px);
+  z-index: -1;
+  transition: right 0.4s ease;
+  box-shadow: inset 0 0 0 2px #000, 0 4px 10px rgba(0,0,0,0.5);
+}
+.cover.playing::after {
+  right: -35%;
+  animation: spin 3s linear infinite;
 }
 </style>
 </head>
