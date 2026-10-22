@@ -123,7 +123,7 @@ A little note before you keep going: today is all about you, and I hope every pa
   voiceTitle: "a little voice note for you",
   voiceSubtitle: "press play and listen till the end",
   voicePhoto: "voice-photo.jpg",
-  voiceNote: "voice.mp3",
+  voiceNote: "voice.mp3", // تم ضبط الامتداد للأفضل والأشمل mp3
 
   /* ================= الصفحة ٧ : الأغاني ================= */
   songsTitle: "Songs",
@@ -482,7 +482,7 @@ nav button.active,nav button:hover{color:#fff}
 .f-final{font-family:'Caveat','Aref Ruqaa',cursive;font-size:clamp(26px,3.6vw,36px);color:var(--tint-text);max-width:560px;line-height:1.3;opacity:0;transform:translateY(12px);transition:opacity 1s ease .4s,transform 1s ease .4s}
 .f-again{color:#eee;opacity:0;pointer-events:none;transition:opacity .8s ease 1.2s}
 
-/* إرسال الجيميل المباشر المطور مع استجابة بصرية */
+/* إرسال الجيميل المباشر - حركة فورية وسريعة جداً */
 .wish{display:flex;flex-direction:column;align-items:center;gap:12px;width:min(460px,88vw);margin-top:14px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .8s ease 1s,transform .8s ease 1s}
 .finale.done .wish{opacity:1;pointer-events:auto;transform:none}
 .finale.done .f-final{opacity:1;transform:none}
@@ -718,7 +718,7 @@ nav button.active,nav button:hover{color:#fff}
     </div>
     <p class="f-final" id="finaleText" dir="auto"></p>
     
-    <!-- الجواب ورسالة الأمنية لإيميل ameersaeed010@gmail.com -->
+    <!-- الجواب ورسالة الأمنية للإيميل -->
     <div class="wish" id="wish">
       <p class="wish-hint" id="wishHint" dir="auto"></p>
       <div class="wish-paper" id="wishPaper">
@@ -761,7 +761,7 @@ const DEFAULTS = {
   reasonsTitle: '21 reasons why I love you', reasonsSubtitle: 'tap every card', reasonsDone: 'and a million more 💜',
   reasons: [],
   messageTo: '', message: '', messageFrom: '',
-  voiceNote: 'voice.m4a', voicePhoto: 'voice-photo.jpg',
+  voiceNote: 'voice.mp3', voicePhoto: 'voice-photo.jpg',
   loveQuestion: 'do you still love me?',
   yesText: 'I knew it 💜',
   noTexts: ['are you sure?', 'really? 🥺', 'think again', 'wrong button', "you can't catch me 😜"],
@@ -1033,7 +1033,7 @@ $('cake').addEventListener('click', () => {
   }, cs.length * 120 + 200);
 });
 
-// إرسال الجيميل المباشر مع معالجة الحالة وتنبيه المستخدم
+// إرسال الجيميل - حركة فورية بدون أي تأخير
 const WISH_EMAIL = String(CONFIG.wishEmail || '').trim();
 $('wishHint').textContent = WISH_EMAIL ? CONFIG.wishHintShared : CONFIG.wishHint;
 $('wishText').placeholder = CONFIG.wishPlaceholder || '';
@@ -1061,11 +1061,20 @@ $('wishBtn').addEventListener('click', () => {
   const txt = $('wishText').value.trim();
   if (!txt){ $('wishText').focus(); return; }
   
-  const wishBtn = $('wishBtn');
-  const originalText = wishBtn.textContent;
-  wishBtn.textContent = "sending... ✨";
-  wishBtn.disabled = true;
+  wishSent = true;
+  $('wishText').blur();
 
+  // تنفيذ أنيميشن الطيران فوراً دون انتظار شبكة الإنترنت
+  const r = $('wishPaper').getBoundingClientRect();
+  $('wish').classList.add('sent');
+  sparkle(r.left + r.width / 2, r.top + r.height / 2);
+  setTimeout(() => sparkle(innerWidth / 2, innerHeight * 0.2), 800);
+  setTimeout(() => {
+    $('wishDone').textContent = CONFIG.wishDoneText;
+    $('wishDone').classList.add('on');
+  }, 1200);
+
+  // الإرسال في الخلفية
   if (WISH_EMAIL){
     fetch('https://formsubmit.co/ajax/' + WISH_EMAIL, {
       method: 'POST',
@@ -1077,25 +1086,7 @@ $('wishBtn').addEventListener('click', () => {
         _subject: NAME + "'s birthday wish & message 💜", 
         wish: txt 
       })
-    })
-    .then(response => response.json())
-    .then(() => {
-      wishSent = true;
-      $('wishText').blur();
-      const r = $('wishPaper').getBoundingClientRect();
-      $('wish').classList.add('sent');
-      sparkle(r.left + r.width / 2, r.top + r.height / 2);
-      setTimeout(() => sparkle(innerWidth / 2, innerHeight * 0.2), 800);
-      setTimeout(() => {
-        $('wishDone').textContent = CONFIG.wishDoneText;
-        $('wishDone').classList.add('on');
-      }, 1200);
-    })
-    .catch(() => {
-      wishBtn.disabled = false;
-      wishBtn.textContent = originalText;
-      alert("Something went wrong. Please check your connection and try sending again!");
-    });
+    }).catch(() => {});
   }
 });
 
@@ -1107,9 +1098,12 @@ const ICON = {
 };
 const bg = $('bg');
 if (CONFIG.bgMusic) bg.src = CONFIG.bgMusic;
-const voice = new Audio(CONFIG.voiceNote || 'voice.m4a');
-voice.preload = 'metadata';
+
+// تحسين الفويس والتحميل
+const voice = new Audio(CONFIG.voiceNote || 'voice.mp3');
+voice.preload = 'auto';
 voice.setAttribute('playsinline', '');
+
 const song = new Audio();
 song.setAttribute('playsinline', '');
 let started = false, musicOn = true, current = -1, playToken = 0;
@@ -1145,12 +1139,16 @@ function updVoiceTime(){
   $('vBar').style.width = d ? (voice.currentTime / d * 100) + '%' : '0%';
   $('vTime').textContent = fmt(voice.currentTime) + ' / ' + fmt(d);
 }
+
 voiceBtn.addEventListener('click', () => {
   started = true;
   if (voice.paused){
     stopSong(false);
     pauseBg();
-    voice.play().then(() => setVoiceUI(true)).catch(() => {
+    voice.load(); // إعادة تحميل الملف عند التشغيل للتأكيد
+    voice.play().then(() => setVoiceUI(true)).catch(err => {
+      console.error(err);
+      alert("Please ensure the voice file is saved as 'voice.mp3' in the repository.");
       setVoiceUI(false);
       playBg();
     });
