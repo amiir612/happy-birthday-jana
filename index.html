@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,14 +30,16 @@ const CONFIG = {
   birthDate: "2005-10-28",
   unlockAt: "",
 
-  // كلام الزراير
+  // كلام الزراير بالإنجليزي
   texts: {
     open: "open me",
     next: "next",
     nowPlaying: "now playing",
     tapToOpen: "tap to open",
     blowHint: "tap the cake to blow out the candles",
-    again: "start again"
+    again: "start again",
+    yes: "yes",
+    no: "no"
   },
 
   /* ================= الصفحة ١ : الافتتاحية ================= */
@@ -100,7 +102,7 @@ A little note before you keep going: today is all about you, and I hope every pa
     "because you're you, and there's no one like you 💜"
   ],
 
-  /* ================= الصفحة ٥ : الرسالة الكبيرة ================= */
+  /* ================= الصفحة ٥ : الرسالة العربية الكبيرة ================= */
   messageTo: `إلى جنجونتي 💜`,
   message: `كل سنة وانتي طيبه يا جوجو وعقبال مليون سنة. حابب اقولك انك اجمل واحلي شخص انا قابلته في حياتي، وان احلي فتره عشتها وحسيتها في حياتي لما كنا سوا ومع بعض.
 
@@ -211,7 +213,7 @@ if (CONFIG.candleColor2) document.documentElement.style.setProperty('--candle2',
 </script>
 
 <title>Happy Birthday</title>
-<!-- الخطوط الكلاسيكية والخطوط العربية الأنيقة -->
+<!-- الخطوط الكلاسيكية والأنماط الأنيقة -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600&family=Caveat:wght@500;600&family=Fredoka:wght@600;700&family=Libre+Baskerville:ital@0;1&family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
@@ -379,7 +381,7 @@ nav button.active,nav button:hover{color:#fff}
 .paper .m-body{white-space:pre-line;text-align:justify}
 .paper .m-from{text-align:left;margin-top:30px;margin-bottom:0;font-weight:700;font-size:1.2em;color:var(--deep)}
 
-/* تطوير مشغل الصوت (الفويس) بإضافة أزرار التقديم والتأخير */
+/* مشغل الفويس المطور باختيارات التقديم والتأخير */
 #p6{background:var(--darker)}
 .voice{min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:50px 6vw;text-align:center}
 .voice h2{font-family:'Playfair Display','Amiri',serif;font-style:italic;font-weight:400;font-size:clamp(28px,4.2vw,46px);color:var(--tint-text)}
@@ -480,7 +482,7 @@ nav button.active,nav button:hover{color:#fff}
 .f-final{font-family:'Caveat','Aref Ruqaa',cursive;font-size:clamp(26px,3.6vw,36px);color:var(--tint-text);max-width:560px;line-height:1.3;opacity:0;transform:translateY(12px);transition:opacity 1s ease .4s,transform 1s ease .4s}
 .f-again{color:#eee;opacity:0;pointer-events:none;transition:opacity .8s ease 1.2s}
 
-/* إرسال الجيميل المباشر */
+/* إرسال الجيميل المباشر المطور مع استجابة بصرية */
 .wish{display:flex;flex-direction:column;align-items:center;gap:12px;width:min(460px,88vw);margin-top:14px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .8s ease 1s,transform .8s ease 1s}
 .finale.done .wish{opacity:1;pointer-events:auto;transform:none}
 .finale.done .f-final{opacity:1;transform:none}
@@ -716,7 +718,7 @@ nav button.active,nav button:hover{color:#fff}
     </div>
     <p class="f-final" id="finaleText" dir="auto"></p>
     
-    <!-- الجواب ورسالة الأمنية الإنجليزية المباشرة لإيميل ameersaeed010@gmail.com -->
+    <!-- الجواب ورسالة الأمنية لإيميل ameersaeed010@gmail.com -->
     <div class="wish" id="wish">
       <p class="wish-hint" id="wishHint" dir="auto"></p>
       <div class="wish-paper" id="wishPaper">
@@ -1031,12 +1033,13 @@ $('cake').addEventListener('click', () => {
   }, cs.length * 120 + 200);
 });
 
-// إرسال الجيميل المباشر
+// إرسال الجيميل المباشر مع معالجة الحالة وتنبيه المستخدم
 const WISH_EMAIL = String(CONFIG.wishEmail || '').trim();
 $('wishHint').textContent = WISH_EMAIL ? CONFIG.wishHintShared : CONFIG.wishHint;
 $('wishText').placeholder = CONFIG.wishPlaceholder || '';
 $('wishBtn').textContent = CONFIG.wishBtnText || '';
 let wishSent = false;
+
 function sparkle(x, y){
   const colors = ['#ffffff', '#ffd45c', CCOLORS[0], CONFIG.candleColor || '#c9a8f0'];
   for (let i = 0; i < 14; i++){
@@ -1052,26 +1055,47 @@ function sparkle(x, y){
     setTimeout(() => s.remove(), 1400);
   }
 }
+
 $('wishBtn').addEventListener('click', () => {
   if (wishSent) return;
   const txt = $('wishText').value.trim();
   if (!txt){ $('wishText').focus(); return; }
-  wishSent = true;
-  $('wishText').blur();
-  const r = $('wishPaper').getBoundingClientRect();
-  $('wish').classList.add('sent');
-  sparkle(r.left + r.width / 2, r.top + r.height / 2);
-  setTimeout(() => sparkle(innerWidth / 2, innerHeight * 0.2), 800);
-  setTimeout(() => {
-    $('wishDone').textContent = CONFIG.wishDoneText;
-    $('wishDone').classList.add('on');
-  }, 1200);
+  
+  const wishBtn = $('wishBtn');
+  const originalText = wishBtn.textContent;
+  wishBtn.textContent = "sending... ✨";
+  wishBtn.disabled = true;
+
   if (WISH_EMAIL){
     fetch('https://formsubmit.co/ajax/' + WISH_EMAIL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ _subject: NAME + "'s birthday wish & message 💜", wish: txt })
-    }).catch(() => {});
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Accept': 'application/json' 
+      },
+      body: JSON.stringify({ 
+        _subject: NAME + "'s birthday wish & message 💜", 
+        wish: txt 
+      })
+    })
+    .then(response => response.json())
+    .then(() => {
+      wishSent = true;
+      $('wishText').blur();
+      const r = $('wishPaper').getBoundingClientRect();
+      $('wish').classList.add('sent');
+      sparkle(r.left + r.width / 2, r.top + r.height / 2);
+      setTimeout(() => sparkle(innerWidth / 2, innerHeight * 0.2), 800);
+      setTimeout(() => {
+        $('wishDone').textContent = CONFIG.wishDoneText;
+        $('wishDone').classList.add('on');
+      }, 1200);
+    })
+    .catch(() => {
+      wishBtn.disabled = false;
+      wishBtn.textContent = originalText;
+      alert("Something went wrong. Please check your connection and try sending again!");
+    });
   }
 });
 
