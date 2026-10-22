@@ -15,13 +15,13 @@ const ME   = "Amir";   // اسمك
 const CONFIG = {
   theme: "maroon",     // ألوان الموقع: "maroon" النبيتي   أو  "purple" بنفسجي
   
-  // 📧 إيميل استقبال الأمنية عبر الجيميل
+  // 📧 إيميل استقبال الأمنية والجواب عبر الجيميل
   wishEmail: "ameersaeed010@gmail.com",
   wishHintShared: "now make a wish, and let it fly ✨",
   wishHint: "now make a wish, and let it fly ✨",
-  wishPlaceholder: "I wish…",
-  wishBtnText: "send it to the stars ✨",
-  wishDoneText: "your wish is on its way 💫",
+  wishPlaceholder: "اكتبي أمنيتك أو رسالتك هنا... ✨",
+  wishBtnText: "إرسال للنجوم ✨",
+  wishDoneText: "وصلت أمنيتك بنجاح 💫",
 
   tabTitle: "Happy 21st Birthday " + NAME,
   navLabels: ["Page 1", "Page 2", "Page 3", "Page 4", "Page 5", "Page 6", "Page 7", "Page 8", "Page 9"],
@@ -182,7 +182,7 @@ Take your time, this page is only for her.
   /* ================= الصفحة ٨ : do you still love me? ================= */
   loveQuestion: "do you still love me?",
   yesText: "I knew it 💜",
-  askPhoto: "ask.jpg",           // صورة الصفحة (اكتب اسم الصورة هنا)
+  askPhoto: "ask.jpg",           // صورة الصفحة
   noVideo: "no.mp4",             // فيديو عند الضغط على No
   yesVideo: "yes.mp4",           // فيديو عند الضغط على Yes
   noTexts: ["are you sure?", "really? 🥺", "think again", "wrong button", "you can't catch me 😜"],
@@ -190,7 +190,7 @@ Take your time, this page is only for her.
   onlyYesText: "now there's only one answer 😌",
   noDodges: 6,
 
-  /* ================= الصفحة ٩ : التورتة ================= */
+  /* ================= الصفحة ٩ : التورتة والجواب ================= */
   finaleTitle: `make a wish, ${NAME}`,
   age: 21,
   candleColor: "#9b59d9",
@@ -468,14 +468,18 @@ nav button.active,nav button:hover{color:#fff}
 .plate{width:118%;height:16px;margin-top:-4px;border-radius:50%;background:var(--plate);box-shadow:0 14px 30px rgba(0,0,0,.45)}
 .f-final{font-family:'Caveat','Aref Ruqaa',cursive;font-size:clamp(26px,3.6vw,36px);color:var(--tint-text);max-width:560px;line-height:1.3;opacity:0;transform:translateY(12px);transition:opacity 1s ease .4s,transform 1s ease .4s}
 .f-again{color:#eee;opacity:0;pointer-events:none;transition:opacity .8s ease 1.2s}
+
+/* إظهار ورقة الجواب والأمنية فور نفخ الشمع */
+.wish{display:flex;flex-direction:column;align-items:center;gap:12px;width:min(460px,88vw);margin-top:14px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .8s ease 1s,transform .8s ease 1s}
+.finale.done .wish{opacity:1;pointer-events:auto;transform:none}
 .finale.done .f-final{opacity:1;transform:none}
 .finale.done .f-again{opacity:1;pointer-events:auto}
 .finale.done .f-hint{opacity:0}
-.wish{display:flex;flex-direction:column;align-items:center;gap:12px;width:min(420px,88vw);margin-top:6px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .8s ease 1s,transform .8s ease 1s}
-.wish-hint{font-family:'Caveat','Aref Ruqaa',cursive;font-size:23px;color:var(--tint);transition:opacity .3s}
-.wish-paper{width:100%;background:var(--paper);border-radius:8px;padding:12px 14px;box-shadow:0 12px 30px rgba(0,0,0,.4)}
-.wish-paper textarea{display:block;width:100%;border:none;outline:none;resize:none;background:transparent;font-family:'Caveat','Aref Ruqaa',cursive;font-size:22px;line-height:1.3;color:var(--paper-ink)}
-.wish-btn{color:#eee;transition:opacity .3s}
+
+.wish-hint{font-family:'Caveat','Aref Ruqaa',cursive;font-size:24px;color:var(--tint);transition:opacity .3s}
+.wish-paper{width:100%;background:var(--paper);border-radius:12px;padding:16px 18px;box-shadow:0 15px 35px rgba(0,0,0,.45);border:1px solid var(--paper-line)}
+.wish-paper textarea{display:block;width:100%;border:none;outline:none;resize:none;background:transparent;font-family:'Caveat','Aref Ruqaa',cursive;font-size:24px;line-height:1.4;color:var(--paper-ink)}
+.wish-btn{color:#eee;transition:opacity .3s;margin-top:6px}
 .wish.sent .wish-paper{animation:wishFly 1.4s ease-in forwards}
 .wish.sent .wish-btn,.wish.sent .wish-hint{opacity:0;pointer-events:none}
 .wish-done{min-height:1.3em;font-family:'Caveat','Aref Ruqaa',cursive;font-size:clamp(24px,3.4vw,32px);color:var(--accent);opacity:0;transition:opacity .8s}
@@ -698,12 +702,17 @@ nav button.active,nav button:hover{color:#fff}
       </div>
     </div>
     <p class="f-final" id="finaleText" dir="auto"></p>
+    
+    <!-- الجواب ورسالة الأمنية التي تتبعت على الجيميل -->
     <div class="wish" id="wish">
       <p class="wish-hint" id="wishHint" dir="auto"></p>
-      <div class="wish-paper" id="wishPaper"><textarea id="wishText" rows="3" maxlength="300" dir="auto"></textarea></div>
+      <div class="wish-paper" id="wishPaper">
+        <textarea id="wishText" rows="4" maxlength="500" dir="auto"></textarea>
+      </div>
       <button class="pill wish-btn" id="wishBtn"></button>
       <p class="wish-done" id="wishDone" dir="auto"></p>
     </div>
+
     <button class="pill f-again" data-go="1" data-label="again">start again</button>
   </div>
 </section>
@@ -747,11 +756,11 @@ const DEFAULTS = {
   askPhoto: '', noVideo: '', yesVideo: '',
   finaleTitle: 'make a wish', age: '', candles: 5, candleColor: '', candleColor2: '', cakePurple: false, finaleText: '',
   wishHint: 'now make a wish, and let it fly ✨',
-  wishHintShared: "write your wish… and I'll do my best to make it come true 💜",
-  wishPlaceholder: 'I wish…',
-  wishBtnText: 'send it to the stars ✨',
-  wishDoneText: 'your wish is on its way 💫',
-  wishEmail: ''
+  wishHintShared: "اكتبي أمنيتك أو جوابك وسوف تصلني فوراً 💜",
+  wishPlaceholder: 'اكتبي أمنيتك أو رسالتك هنا...',
+  wishBtnText: 'إرسال للنجوم ✨',
+  wishDoneText: 'وصلت أمنيتك بنجاح 💫',
+  wishEmail: 'ameersaeed010@gmail.com'
 };
 
 if (CONFIG_OK) {
@@ -1009,7 +1018,7 @@ $('cake').addEventListener('click', () => {
   }, cs.length * 120 + 200);
 });
 
-// إرسال الجيميل المباشر كـ AJAX
+// إرسال الجيميل المباشر عند كتابة الجواب أو الأمنية
 const WISH_EMAIL = String(CONFIG.wishEmail || '').trim();
 $('wishHint').textContent = WISH_EMAIL ? CONFIG.wishHintShared : CONFIG.wishHint;
 $('wishText').placeholder = CONFIG.wishPlaceholder || '';
@@ -1048,7 +1057,7 @@ $('wishBtn').addEventListener('click', () => {
     fetch('https://formsubmit.co/ajax/' + WISH_EMAIL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ _subject: NAME + "'s birthday wish 💜", wish: txt })
+      body: JSON.stringify({ _subject: NAME + "'s birthday wish & message 💜", wish: txt })
     }).catch(() => {});
   }
 });
@@ -1134,7 +1143,6 @@ function stopSong(resume){
   if (resume) playBg();
 }
 
-/* تشغيل الأغنية مباشر فور الضغط */
 function playSong(i){
   started = true;
   if (current === i){ stopSong(true); return; }
@@ -1177,7 +1185,6 @@ song.addEventListener('timeupdate', () => {
 song.addEventListener('ended', () => stopSong(true));
 document.querySelectorAll('.cover').forEach(b => b.addEventListener('click', () => playSong(+b.dataset.i)));
 
-// مشغل الفيديو لصفحة 8
 const vmodal = $('vmodal'), vplayer = $('vplayer');
 let vDone = null;
 function vmodalOpen(){ return vmodal ? vmodal.classList.contains('on') : false; }
@@ -1208,7 +1215,6 @@ if (vplayer) {
 }
 if (vmodal) vmodal.addEventListener('click', e => { if (e.target === vmodal) closeVideo(); });
 
-// تفاعل صفحة 8 والفيديوهات
 const askImg = $('askImg'), yesBtn = $('yesBtn'), noBtn = $('noBtn');
 if (askImg) {
   askImg.onerror = () => { askImg.style.display = 'none'; };
